@@ -30,14 +30,11 @@ export function Navbar() {
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-32">
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 relative group-hover:scale-110 transition-transform duration-300">
-              <Image src="/eb-logo.png" alt="E@B Logo" fill className="rounded-md object-contain" />
+            <div className="w-64 h-64 relative group-hover:scale-110 transition-transform duration-300 mt-4">
+              <Image src="/logo_header.png" alt="E@B Logo" fill className="rounded-md object-contain" />
             </div>
-            <span className="font-bold text-xl text-foreground group-hover:text-blue-400 transition-colors duration-300">
-              Entrepreneurs @ Berkeley
-            </span>
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
@@ -68,12 +65,14 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <Button 
-                variant="outline" 
-                className="border-2 border-blue-500/30 text-blue-400 hover:border-blue-500/60 hover:bg-blue-500/10 bg-transparent font-semibold px-6 py-2 transition-all duration-300 hover:scale-105"
-              >
-                Contact
-              </Button>
+              <Link href="https://forms.gle/Py8cwGjt3kJCrRLH7" target="_blank" rel="noopener noreferrer">
+                <Button 
+                  variant="outline" 
+                  className="border-2 border-blue-500/30 text-blue-400 hover:border-blue-500/60 hover:bg-blue-500/10 bg-transparent font-semibold px-6 py-2 transition-all duration-300 hover:scale-105"
+                >
+                  Application
+                </Button>
+              </Link>
             </motion.div>
           </div>
           

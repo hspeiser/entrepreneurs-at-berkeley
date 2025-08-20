@@ -140,15 +140,15 @@ export default function AboutPage() {
             >
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm">
                 <Zap className="w-4 h-4 mr-2" />
-                ELITE ENTREPRENEURSHIP COMMUNITY
+                E@B
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-tight">
-                ABOUT <span className="gradient-text">E@B</span>
+                ABOUT <span className="gradient-text">US</span>
               </h1>
               <p className="text-xl md:text-2xl lg:text-3xl text-blue-100 mb-12 max-w-4xl mx-auto font-light">
                 We are a community of builders, innovators, and leaders at UC Berkeley, united by a passion for entrepreneurship.
                 <br />
-                <span className="text-blue-300 font-semibold">Excellence in execution. Impact at scale.</span>
+                <span className="text-blue-300 font-semibold">What We Do and Why</span>
               </p>
             </motion.div>
 
