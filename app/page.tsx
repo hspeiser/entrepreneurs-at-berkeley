@@ -282,7 +282,7 @@ export default function HomePage() {
                   description: "Bring your idea to life. "
                 },
                 {
-                  src: "/founder_dinner.JPG",
+                  src: "/founder_dinner.jpg",
                   title: "Founder Dinners",
                   description: "Build community."
                 },

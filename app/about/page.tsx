@@ -245,13 +245,13 @@ export default function AboutPage() {
                   src: "/calday.JPG",
                 },
                 {
-                  src: "/tahoe.JPG",
+                  src: "/tahoe.jpg",
                 },
                 {
                   src: "/picnic.JPG",
                 },   
                 {
-                  src: "/grad.JPG",
+                  src: "/grad.jpg",
                 },  
                 {
                   src: "/ski.JPG",
