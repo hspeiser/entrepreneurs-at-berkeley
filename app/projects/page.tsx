@@ -94,7 +94,7 @@ export default function ProjectsPage() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/202411241117_E@BClubShoot_0542_5D Mark IV.jpg"
+                              src="/202411241117_E@BClubShoot_0542_5D Mark IV.JPG"
               alt="E&B Professional Team Meeting"
               fill
               className="object-cover"

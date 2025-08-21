@@ -49,7 +49,7 @@ const timeline = [
 
 const requirements = [
   "UC Berkeley student (any year, any major)",
-  "Great to have experience in building/shipping, but not required at all",
+  "Great to have experience in building/shipping, but not required",
   "Portfolio of any technical, growth, or strategic work (can be anything)",
   "Passion for entrepreneurship and innovation (we're looking for people who are excited to build)",
 ]
@@ -97,6 +97,12 @@ const whatWeOffer = [
     icon: Calendar,
     color: "from-indigo-400 to-purple-400",
   },
+  {
+    title: "Social",
+    description: "Fun socials, retreats, and team bonding",
+    icon: Users,
+    color: "from-pink-400 to-rose-400",
+  },
 ]
 
 export default function RecruitmentPage() {
@@ -112,7 +118,7 @@ export default function RecruitmentPage() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/group_photo_big_ok.jpg"
+              src="/group_photo_big_ok.JPG"
               alt="E&B Community Group"
               fill
               className="object-cover"
@@ -267,7 +273,7 @@ export default function RecruitmentPage() {
               >
                 <div className="relative overflow-hidden rounded-2xl">
                   <Image
-                    src="/student_giving_talk.jpg"
+                    src="/student_giving_talk.JPG"
                     alt="E&B Team Collaboration"
                     width={600}
                     height={400}

@@ -272,12 +272,12 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  src: "/group_photo_make_sure_its_small.jpg",
+                  src: "/group_photo_make_sure_its_small.JPG",
                   title: "Incubator + Demo Day",
                   description: "Sponsored by Techstars."
                 },
                 {
-                  src: "/panel_of_smart_people.jpg",
+                  src: "/panel_of_smart_people.JPG",
                   title: "Build Sessions + Hackathons",
                   description: "Bring your idea to life. "
                 },
@@ -287,7 +287,7 @@ export default function HomePage() {
                   description: "Build community."
                 },
                 {
-                  src: "/202411241117_E@BClubShoot_0542_5D Mark IV.jpg",
+                  src: "/202411241117_E@BClubShoot_0542_5D Mark IV.JPG",
                   title: "Projects",
                   description: "Real client work with top companies and startups."
                 },
