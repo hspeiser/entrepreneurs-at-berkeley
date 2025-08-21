@@ -140,7 +140,7 @@ export default function AboutPage() {
                       WHO WE <span className="gradient-text ml-2">ARE</span>
                     </h3>
                     <p className="text-lg text-muted-foreground leading-relaxed flex-1">
-                      We are not just going to help you make a pitch deck. <span className="text-primary font-semibold">We are going to build your product with you and grow fast.</span> 
+                      We are not just going to help you make a pitch deck. <span className="text-primary font-semibold">We are going to build your product with you and grow fast. </span> 
                       Our members are already shipping products, raising capital, and working at companies like Google, Tesla, and NVIDIA. 
                       Join us and make something great. 
                     </p>
