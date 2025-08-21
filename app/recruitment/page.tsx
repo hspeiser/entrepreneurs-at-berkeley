@@ -118,7 +118,7 @@ export default function RecruitmentPage() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/group_photo_big_ok.JPG"
+              src="/group_photo_big_ok.jpg"
               alt="E&B Community Group"
               fill
               className="object-cover"
@@ -273,7 +273,7 @@ export default function RecruitmentPage() {
               >
                 <div className="relative overflow-hidden rounded-2xl">
                   <Image
-                    src="/student_giving_talk.jpg"
+                    src="/student_giving_talk.JPG"
                     alt="E&B Team Collaboration"
                     width={600}
                     height={400}
