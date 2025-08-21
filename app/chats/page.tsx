@@ -3,9 +3,9 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+
 import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, MapPin, User, Search, Filter, Coffee, Users2, Zap } from "lucide-react"
+import { Calendar, Clock, MapPin, User, Coffee, Users2, Zap } from "lucide-react"
 import Image from "next/image"
 import { Navbar } from "@/components/layout/navbar"
 import NeuralNetworkCanvas from "@/components/ui/neural-network-canvas"
@@ -27,8 +27,6 @@ interface CoffeeChat {
 export default function ChatsPage() {
   const [chats, setChats] = useState<CoffeeChat[]>([])
   const [loading, setLoading] = useState(true)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [filterStatus, setFilterStatus] = useState<string>("all")
 
   // Mock data - replace with Airtable integration
   const mockChats: CoffeeChat[] = [
@@ -99,16 +97,7 @@ export default function ChatsPage() {
     fetchChats()
   }, [])
 
-  const filteredChats = chats.filter(chat => {
-    const matchesSearch = chat.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         chat.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         chat.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         chat.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-    
-    const matchesFilter = filterStatus === "all" || chat.status === filterStatus
-    
-    return matchesSearch && matchesFilter
-  })
+
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -149,63 +138,22 @@ export default function ChatsPage() {
             >
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm">
                 <Coffee className="w-4 h-4 mr-2" />
-                INDUSTRY CONNECTIONS
+                COFFEE CHATS NOW OPEN! 
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-tight">
                 COFFEE <span className="gradient-text">CHATS</span>
               </h1>
               <p className="text-xl md:text-2xl lg:text-3xl text-blue-100 mb-12 max-w-4xl mx-auto font-light">
-                Connect with industry leaders, successful founders, and experienced professionals.
+                Connect with E@B members and learn about our community!
                 <br />
-                <span className="text-blue-300 font-semibold">Real conversations, real insights, real impact.</span>
+                <span className="text-blue-300 font-semibold">Schedule Coffee Chats Below.</span>
               </p>
             </motion.div>
 
           </div>
         </section>
 
-        {/* Search and Filters Section */}
-        <section className="py-16 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true }}
-              className="max-w-4xl mx-auto"
-            >
-              <div className="flex flex-col md:flex-row gap-4">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Search chats by name, company, or topic..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 bg-card/50 border-blue-500/20 focus:border-blue-500/40"
-                  />
-                </div>
-                <div className="flex gap-2">
-                  {["all", "upcoming", "completed"].map((status) => (
-                    <Button
-                      key={status}
-                      variant={filterStatus === status ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setFilterStatus(status)}
-                      className={`capitalize ${
-                        filterStatus === status 
-                          ? "bg-blue-600 hover:bg-blue-700" 
-                          : "border-blue-500/20 hover:border-blue-500/40"
-                      }`}
-                    >
-                      <Filter className="h-4 w-4 mr-2" />
-                      {status}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+
 
         {/* Coffee Chats Gallery */}
         <section className="py-24 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
@@ -226,7 +174,7 @@ export default function ChatsPage() {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredChats.map((chat, index) => (
+                {chats.map((chat, index) => (
                   <motion.div
                     key={chat.id}
                     initial={{ opacity: 0, y: 30 }}
@@ -329,7 +277,7 @@ export default function ChatsPage() {
             )}
 
             {/* Empty State */}
-            {!loading && filteredChats.length === 0 && (
+            {!loading && chats.length === 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -347,48 +295,7 @@ export default function ChatsPage() {
         </section>
 
 
-        {/* CTA Section */}
-        <section className="py-24 bg-gradient-to-b from-background to-background/95 backdrop-blur-sm">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-8">
-                WANT TO <span className="gradient-text">CONNECT?</span>
-              </h2>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto">
-                Ready to learn from industry leaders and expand your network?
-                <br />
-                <span className="text-primary font-semibold">Great conversations start with great coffee.</span>
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"
-                  >
-                    <Users2 className="mr-3 h-6 w-6" />
-                    JOIN A CHAT
-                  </Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="text-xl px-12 py-8 font-bold border-2 border-blue-500/30 hover:border-blue-500/60 hover:bg-blue-500/10 bg-transparent backdrop-blur-sm"
-                  >
-                    <Coffee className="mr-3 h-6 w-6" />
-                    HOST A CHAT
-                  </Button>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+
       </main>
     </div>
   )

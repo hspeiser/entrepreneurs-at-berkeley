@@ -10,27 +10,39 @@ import NeuralNetworkCanvas from "@/components/ui/neural-network-canvas"
 
 const timeline = [
   {
-    phase: "Application",
-    date: "Jan 15 - Feb 1",
-    description: "Submit your application with portfolio and project examples",
+    phase: "Coffee Chats",
+    date: "Aug 27 - Sep 5",
+    description: "1:1 Chats with E@B Members, get to know us!",
     status: "upcoming",
   },
   {
-    phase: "Technical Challenge",
-    date: "Feb 5 - Feb 12",
-    description: "Complete a real-world technical or strategy challenge",
+    phase: "Tabling",
+    date: "Aug 27 - Sep 5",
+    description: "Visit our table on campus and meet our members!",
     status: "upcoming",
   },
   {
-    phase: "Interviews",
-    date: "Feb 15 - Feb 22",
-    description: "One-on-one interviews with current members and leadership",
+    phase: "Infosession 1",
+    date: "Sep 2",
+    description: "Learn about what we do, our mission, and our community!",
     status: "upcoming",
   },
   {
-    phase: "Final Selection",
-    date: "Feb 25",
-    description: "Final decisions and welcome to the community",
+    phase: "Infosession 2",
+    date: "Sep 3",
+    description: "Same info as first one, feel free to come to one!",
+    status: "upcoming",
+  },
+  {
+    phase: "Diversity Night",
+    date: "Sep 4",
+    description: "Learn about our values and get your apps reviewed!",
+    status: "upcoming",
+  },
+  {
+    phase: "Applications Due",
+    date: "Sep 5, 12pm",
+    description: "Final deadline for submitting apps, make sure to submit by 12pm!",
     status: "upcoming",
   },
 ]
@@ -120,7 +132,7 @@ export default function RecruitmentPage() {
             >
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm">
                 <Zap className="w-4 h-4 mr-2" />
-                JOIN THE ELITE
+                APPS DUE 9/5!
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-tight">
                 JOIN THE <span className="gradient-text">MISSION</span>
@@ -128,14 +140,14 @@ export default function RecruitmentPage() {
               <p className="text-xl md:text-2xl lg:text-3xl text-blue-100 mb-12 max-w-4xl mx-auto font-light">
                 We are looking for the ambitious, the relentless, and the visionary.
                 <br />
-                <span className="text-blue-300 font-semibold">If you are ready to build, you belong here.</span>
+                <span className="text-blue-300 font-semibold">If you want to build, you belong here.</span>
               </p>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"
                 >
-                  START YOUR APPLICATION
+                  APPLY NOW
                   <ArrowRight className="ml-3 h-6 w-6" />
                 </Button>
               </motion.div>
@@ -145,40 +157,7 @@ export default function RecruitmentPage() {
         </section>
 
         {/* Builder/Visionary Cards Section */}
-        <section className="py-24 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            >
-              <Card className="bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-black text-foreground">For Builders</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <p>
-                    Are you a developer, engineer, or designer with a passion for creating? We provide the team, the
-                    resources, and the network to bring your technical skills to the forefront of innovation.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-black text-foreground">For Visionaries</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <p>
-                    Do you have an idea that could change an industry? We are the incubator for your vision, providing
-                    the strategic guidance and mentorship to turn a concept into a company.
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-        </section>
+
 
         {/* Recruitment Timeline */}
         <section className="py-24 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
@@ -193,7 +172,7 @@ export default function RecruitmentPage() {
               <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6">
                 <span className="gradient-text">RECRUITMENT</span> TIMELINE
               </h2>
-              <p className="text-xl text-muted-foreground">Our selective process ensures we find the best builders</p>
+              <p className="text-xl text-muted-foreground">Come to our recruitment events and learn more about us!</p>
             </motion.div>
 
             <div className="relative">
@@ -209,17 +188,33 @@ export default function RecruitmentPage() {
                   className={`relative flex items-center mb-12 ${index % 2 === 0 ? "justify-start" : "justify-end"}`}
                 >
                   <div className={`w-1/2 ${index % 2 === 0 ? "pr-8" : "pl-8"}`}>
-                    <Card className="p-6 bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm">
-                      <CardContent className="p-0">
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            {item.phase}
+                    {item.phase === "Coffee Chats" ? (
+                      <Link href="/chats">
+                        <Card className="p-6 bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm cursor-pointer hover:scale-105">
+                          <CardContent className="p-0">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                {item.phase}
+                              </div>
+                              <span className="text-sm text-muted-foreground">{item.date}</span>
+                            </div>
+                            <p className="text-muted-foreground">{item.description}</p>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ) : (
+                      <Card className="p-6 bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm">
+                        <CardContent className="p-0">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                              {item.phase}
+                            </div>
+                            <span className="text-sm text-muted-foreground">{item.date}</span>
                           </div>
-                          <span className="text-sm text-muted-foreground">{item.date}</span>
-                        </div>
-                        <p className="text-muted-foreground">{item.description}</p>
-                      </CardContent>
-                    </Card>
+                          <p className="text-muted-foreground">{item.description}</p>
+                        </CardContent>
+                      </Card>
+                    )}
                   </div>
 
                   <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-4 border-background shadow-lg"></div>
@@ -271,7 +266,7 @@ export default function RecruitmentPage() {
               >
                 <div className="relative overflow-hidden rounded-2xl">
                   <Image
-                    src="/another_group_photo_make_sure_its_small.jpg"
+                    src="/student_giving_talk.jpg"
                     alt="E&B Team Collaboration"
                     width={600}
                     height={400}

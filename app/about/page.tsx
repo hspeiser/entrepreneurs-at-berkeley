@@ -8,50 +8,7 @@ import Image from "next/image"
 import { Navbar } from "@/components/layout/navbar"
 import NeuralNetworkCanvas from "@/components/ui/neural-network-canvas"
 
-const differentiators = [
-  {
-    title: "Top-tier, Pre-vetted Talent",
-    description:
-      "All members are hand-selected builders, designers, and founders from UC Berkeley with experience at companies like Google, TikTok, NVIDIA, Tesla, and Anthropic. Two have gotten into Y-Combinator, 6 into SkyDeck Incubator, we are all student founders. Think of us as a first filter for people you want in your company.",
-    icon: Users,
-    color: "from-blue-400 to-cyan-400",
-  },
-  {
-    title: "Founder-first Mindset",
-    description:
-      "Many of us have launched VC-backed startups, participated in Y Combinator, or built and shipped products independently.",
-    icon: Rocket,
-    color: "from-purple-400 to-pink-400",
-  },
-  {
-    title: "High Execution Velocity",
-    description:
-      "We operate like a lean startup team — fast iterations, clear communication, and product ownership from day one.",
-    icon: Target,
-    color: "from-green-400 to-emerald-400",
-  },
-  {
-    title: "Multi-disciplinary Skill Sets",
-    description:
-      "Our teams blend deep technical knowledge (ML, infra, AI agents) with strategic thinking (GTM, ops, AI commercialization).",
-    icon: Lightbulb,
-    color: "from-orange-400 to-red-400",
-  },
-  {
-    title: "Real Project Commitment",
-    description:
-      "Every team member commits 20+ hours/week, ensuring consistent progress and professional-grade outcomes.",
-    icon: Zap,
-    color: "from-yellow-400 to-orange-400",
-  },
-  {
-    title: "Proven Industry Impact",
-    description:
-      "We've already delivered value to companies like LinkedIn, TikTok, NVIDIA, Google, Tesla, Salesforce, Coinbase, etc. on strategy, product, and engineering challenges, not case studies, but real work.",
-    icon: TrendingUp,
-    color: "from-emerald-400 to-teal-400",
-  },
-]
+
 
 const capabilities = [
   {
@@ -261,54 +218,7 @@ export default function AboutPage() {
           </motion.div>
         </div>
 
-        {/* What Differentiates Us */}
-        <section className="py-24 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6">
-                WHAT SETS US <span className="gradient-text">APART</span>
-              </h2>
-              <p className="text-xl text-muted-foreground">We're not your typical student organization</p>
-            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {differentiators.map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.02, rotateY: 2 }}
-                  className="perspective-1000"
-                >
-                  <Card className="p-6 h-full bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm group">
-                    <motion.div
-                      className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg`}
-                    />
-                    <CardContent className="p-0 relative z-10">
-                      <motion.div
-                        className={`w-12 h-12 bg-gradient-to-r ${item.color} rounded-lg flex items-center justify-center mb-4 shadow-lg`}
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <item.icon className="h-6 w-6 text-white" />
-                      </motion.div>
-                      <h3 className="text-xl font-black text-foreground mb-3">{item.title}</h3>
-                      <p className="text-muted-foreground">{item.description}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Community Photos */}
         <section className="py-24 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
