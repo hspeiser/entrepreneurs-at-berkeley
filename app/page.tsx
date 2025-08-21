@@ -36,9 +36,9 @@ const allCompanies = [
 ]
 
 const partnerLogos = [
-  { name: "Y Combinator", logo: "/partners/ycombinator-ar21.svg" },
   { name: "Google", logo: "/partners/1559064735Google-monochrome-logo-black.svg" },
   { name: "Pear VC", logo: "/partners/Pear_VC_logo.svg" },
+  { name: "Y Combinator", logo: "/partners/ycombinator-ar21.svg" },
   { name: "Haas", logo: "/partners/haas.svg" },
   { name: "Radical Ventures", logo: "/partners/radical-ventures-header-logo.svg" },
   { name: "Techstars", logo: "/partners/techstars-logo-vector-removebg-preview.svg" },
@@ -289,7 +289,7 @@ export default function HomePage() {
                 {
                   src: "/202411241117_E@BClubShoot_0542_5D Mark IV.jpg",
                   title: "Projects",
-                  description: "Real client work with top companies and startups"
+                  description: "Real client work with top companies and startups."
                 },
                 {
                   src: "/dude_looking_focused.JPG",
@@ -421,7 +421,7 @@ export default function HomePage() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Link href="/recruitment">
+                <Link href="https://forms.gle/Py8cwGjt3kJCrRLH7" target="_blank" rel="noopener noreferrer">
                   <Button
                     size="lg"
                     className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"

@@ -49,10 +49,9 @@ const timeline = [
 
 const requirements = [
   "UC Berkeley student (any year, any major)",
-  "Demonstrated experience in building/shipping products",
-  "Portfolio of technical or strategic work",
-  "Commitment to 20+ hours/week on projects",
-  "Passion for entrepreneurship and innovation",
+  "Great to have experience in building/shipping, but not required at all",
+  "Portfolio of any technical, growth, or strategic work (can be anything)",
+  "Passion for entrepreneurship and innovation (we're looking for people who are excited to build)",
 ]
 
 const whatWeOffer = [
@@ -143,13 +142,15 @@ export default function RecruitmentPage() {
                 <span className="text-blue-300 font-semibold">If you want to build, you belong here.</span>
               </p>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"
-                >
-                  APPLY NOW
-                  <ArrowRight className="ml-3 h-6 w-6" />
-                </Button>
+                <Link href="https://forms.gle/Py8cwGjt3kJCrRLH7" target="_blank" rel="noopener noreferrer">
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"
+                  >
+                    APPLY NOW
+                    <ArrowRight className="ml-3 h-6 w-6" />
+                  </Button>
+                </Link>
               </motion.div>
             </motion.div>
 
@@ -238,7 +239,7 @@ export default function RecruitmentPage() {
                   WHAT WE'RE <span className="gradient-text">LOOKING FOR</span>
                 </h2>
                 <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                  We seek exceptional individuals who have already demonstrated their ability to build and ship products.
+                  We are looking for students passionate about building impactful products and changing the world!
                 </p>
                 <ul className="space-y-4">
                   {requirements.map((requirement, index) => (
@@ -251,7 +252,7 @@ export default function RecruitmentPage() {
                       className="flex items-center"
                     >
                       <CheckCircle className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" />
-                      <span className="text-muted-foreground">{requirement}</span>
+                      <span className={`text-muted-foreground ${requirement.startsWith("Passion for entrepreneurship and innovation") ? "font-bold" : ""}`}>{requirement}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -345,20 +346,19 @@ export default function RecruitmentPage() {
                 READY TO <span className="gradient-text">APPLY?</span>
               </h2>
               <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto">
-                Applications are now open for Spring 2024. Don't miss your chance to join Berkeley's most exclusive
-                entrepreneurship community.
-                <br />
-                <span className="text-primary font-semibold">The future belongs to those who build it.</span>
+                <span className="text-primary font-semibold">Applications are now open for Fall 2025.</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"
-                  >
-                    Submit Application
-                    <ArrowRight className="ml-3 h-6 w-6" />
-                  </Button>
+                  <Link href="https://forms.gle/Py8cwGjt3kJCrRLH7" target="_blank" rel="noopener noreferrer">
+                    <Button
+                      size="lg"
+                      className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"
+                    >
+                      Submit Application
+                      <ArrowRight className="ml-3 h-6 w-6" />
+                    </Button>
+                  </Link>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link href="/about" onClick={() => window.scrollTo(0, 0)}>
@@ -372,83 +372,12 @@ export default function RecruitmentPage() {
                   </Link>
                 </motion.div>
               </div>
-              <p className="text-muted-foreground mt-8 text-sm">Application deadline: February 1, 2024</p>
+              <p className="text-muted-foreground mt-8 text-sm">Application deadline: September 5, 2025</p>
             </motion.div>
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gradient-to-b from-background/95 to-background text-foreground py-20 border-t border-blue-500/20 relative z-10 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div>
-              <motion.div
-                className="flex items-center space-x-3 mb-6"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <div className="w-10 h-10 relative">
-                  <Image
-                    src="/eb-logo.png"
-                    alt="Entrepreneurs @ Berkeley Logo"
-                    fill
-                    className="rounded-md object-contain"
-                  />
-                </div>
-                <span className="font-bold text-xl">Entrepreneurs @ Berkeley</span>
-              </motion.div>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Building the next generation of founders and innovators.
-                <span className="text-primary font-semibold"> We mean business.</span>
-              </p>
-            </div>
-            <div>
-              <h3 className="font-bold text-foreground mb-6 text-lg">Quick Links</h3>
-              <ul className="space-y-3">
-                {["About", "Projects", "Join Us"].map((item) => (
-                  <motion.li key={item} whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400 }}>
-                    <Link
-                      href={item === "Join Us" ? "/recruitment" : `/${item.toLowerCase().replace(" ", "-")}`}
-                      onClick={() => window.scrollTo(0, 0)}
-                      className="text-muted-foreground hover:text-blue-400 transition-colors text-sm"
-                    >
-                      {item}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-foreground mb-6 text-lg">Contact</h3>
-              <ul className="space-y-3 text-muted-foreground text-sm">
-                <li>UC Berkeley Campus</li>
-                <li>Berkeley, CA 94720</li>
-                <li className="text-blue-400">hello@eab.berkeley.edu</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-foreground mb-6 text-lg">Follow Us</h3>
-              <div className="flex space-x-3">
-                {["LinkedIn", "Twitter"].map((social) => (
-                  <motion.div key={social} whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }}>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="text-muted-foreground hover:text-blue-400 hover:border-blue-500/50 bg-transparent"
-                    >
-                      {social}
-                    </Button>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-blue-500/20 pt-8 text-center text-muted-foreground text-sm">
-            <p>&copy; 2024 Entrepreneurs @ Berkeley. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+    
     </div>
   )
 }

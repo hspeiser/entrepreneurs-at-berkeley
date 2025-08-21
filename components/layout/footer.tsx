@@ -18,6 +18,12 @@ export function Footer() {
                 <p className="text-muted-foreground text-xs leading-relaxed">
                 The Leading entrepreneurship org at UC Berkeley. 
                 </p>
+                <div className="mt-3">
+                  <p className="text-muted-foreground text-xs">Sponsored by</p>
+                  <div className="mt-2 w-32 h-10 relative">
+                    <Image src="/partners/haas.svg" alt="Haas logo" fill className="object-contain" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
