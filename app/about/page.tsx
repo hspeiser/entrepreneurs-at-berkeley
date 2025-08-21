@@ -78,7 +78,7 @@ export default function AboutPage() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/person_giving_talk.jpg"
+                              src="/person_giving_talk.JPG"
               alt="E&B Speaker Presentation"
               fill
               className="object-cover"
@@ -140,7 +140,7 @@ export default function AboutPage() {
                       WHO WE <span className="gradient-text ml-2">ARE</span>
                     </h3>
                     <p className="text-lg text-muted-foreground leading-relaxed flex-1">
-                      We are not just going to help you make a pitch deck. <span className="text-primary font-semibold">We are going to build your product with you and grow fast.</span> 
+                      We are not just going to help you make a pitch deck. <span className="text-primary font-semibold">We are going to build your product with you and grow fast. </span> 
                       Our members are already shipping products, raising capital, and working at companies like Google, Tesla, and NVIDIA. 
                       Join us and make something great. 
                     </p>
@@ -239,16 +239,16 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  src: "/202411241117_E@BClubShoot_0702_5D Mark IV.jpg",
+                  src: "/202411241117_E@BClubShoot_0702_5D Mark IV.JPG",
                 },
                 {
-                  src: "/calday.jpg",
+                  src: "/calday.JPG",
                 },
                 {
-                  src: "/tahoe.jpg",
+                  src: "/tahoe.JPG",
                 },
                 {
-                  src: "/picnic.jpg",
+                  src: "/picnic.JPG",
                 },   
                 {
                   src: "/grad.JPG",
