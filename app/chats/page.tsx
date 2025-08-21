@@ -17,7 +17,7 @@ export default function ChatsPage() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-                              src="/club_photo_laughing_chat_page.JPG"
+              src="/club_photo_laughing_chat_page.jpg"
               alt="E&B Community Coffee Chat"
               fill
               className="object-cover"

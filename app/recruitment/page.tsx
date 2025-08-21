@@ -273,7 +273,7 @@ export default function RecruitmentPage() {
               >
                 <div className="relative overflow-hidden rounded-2xl">
                   <Image
-                    src="/student_giving_talk.JPG"
+                    src="/student_giving_talk.jpg"
                     alt="E&B Team Collaboration"
                     width={600}
                     height={400}
