@@ -400,10 +400,10 @@ export default function AboutPage() {
                     </p>
                     <div className="flex flex-wrap gap-2">
                       <span className="inline-flex items-center px-3 py-1 rounded-full bg-green-500/20 border border-green-400/30 text-green-300 text-sm font-medium">
-                        SkyDeck Demo Day Winners
+                        MoffittStatus
                       </span>
                       <span className="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-300 text-sm font-medium">
-                        Pad-13 Batch 20
+                        Berkeley SkyDeck Pad-13 Batch 20
                       </span>
                     </div>
                   </CardContent>
