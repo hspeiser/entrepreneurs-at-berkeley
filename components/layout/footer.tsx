@@ -31,13 +31,17 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-foreground mb-6 text-lg">Quick Links</h3>
             <ul className="space-y-3">
-              {["About", "Projects", "Join Us"].map((item) => (
-                <li key={item}>
+              {[
+                { name: "About", href: "/about" },
+                { name: "Projects", href: "/projects" },
+                { name: "Join Us", href: "/recruitment" }
+              ].map((item) => (
+                <li key={item.name}>
                   <Link
-                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    href={item.href}
                     className="text-muted-foreground hover:text-blue-400 transition-colors text-sm"
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}
