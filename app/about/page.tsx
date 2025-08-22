@@ -18,7 +18,7 @@ const capabilities = [
         title: "LLM-Powered Product Prototyping & Infra Scaling",
         description: "We build internal tools and experimental AI agents that integrate with enterprise workflows, often in security-conscious or high-velocity environments.",
         examples:
-          "MCP + Context Management for Block, Members have built generative agents for compliance (Delve, YC), voice AI (Retell, YC), and user behavior tracking (Human Behaviors, YC), Generative AI Optimization and Software (Relixir, YC).",
+          "MCP + Context Management for Block, Members have built generative agents for compliance (Delve, YC), voice AI (Retell, YC), and user behavior tracking (Human Behavior, YC), Generative AI Optimization and Software (Relixir, YC).",
       },
       {
         title: "ML and UI/UX Design",
@@ -410,7 +410,7 @@ export default function AboutPage() {
                 </Card>
               </motion.div>
 
-              {/* Human Behaviors */}
+              {/* Human Behavior */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -423,7 +423,7 @@ export default function AboutPage() {
                     <div className="relative overflow-hidden rounded-xl mb-6">
                       <Image
                         src="/skyler.png"
-                        alt="Human Behaviors - Skyler Ji"
+                        alt="Human Behavior - Skyler Ji"
                         width={600}
                         height={400}
                         className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
@@ -436,7 +436,7 @@ export default function AboutPage() {
                         </div>
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-foreground mb-4">Human Behaviors</h3>
+                    <h3 className="text-2xl font-bold text-foreground mb-4">Human Behavior</h3>
                     <p className="text-muted-foreground leading-relaxed mb-4">
                       Human Behavior uses vision models to watch all user web sessions so you know exactly how users use every part of your product. Founded by Skyler Ji (previously E@B DVP), the company was accepted into Y Combinator X25 and has raised $5M in funding.
                     </p>
