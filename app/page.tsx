@@ -264,7 +264,7 @@ export default function HomePage() {
                 WHAT <span className="gradient-text">WE DO</span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                We provide resources and opportunities for students to be the best founders that they can be 
+                We provide resources and opportunities so student founders can be the 
                 <span className="text-primary font-semibold"> the best of the best.</span>
               </p>
             </motion.div>
