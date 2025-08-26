@@ -36,7 +36,7 @@ export default function ChatsPage() {
             >
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm">
                 <Coffee className="w-4 h-4 mr-2" />
-                Coming Soon...
+                Connect with E@B Members
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-tight">
                 COFFEE <span className="gradient-text">CHATS</span>
@@ -47,27 +47,46 @@ export default function ChatsPage() {
                 <span className="text-blue-300 font-semibold">Schedule Coffee Chats Below.</span>
               </p>
             </motion.div>
-
           </div>
         </section>
 
-        {/* Coming Soon Section */}
+        {/* Airtable Embed Section */}
         <section className="py-24 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center py-20"
+              className="text-center mb-16"
             >
-              <Coffee className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Coming Soon...</h3>
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+                Coffee Chats
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Schedule coffee chats with E@B members! Please limit yourself to 3 chats. 
+              </p>
+            </motion.div>
+
+            {/* Airtable Embed */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="w-full"
+            >
+              <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+                <iframe
+                  className="airtable-embed w-full"
+                  src="https://airtable.com/embed/apph2byC1IzesgfgC/shrFCyuCjSaIpEL28"
+                  frameBorder="0"
+                  width="100%"
+                  height="800"
+                  style={{ background: 'transparent', border: '1px solid #ccc' }}
+                />
+              </div>
             </motion.div>
           </div>
         </section>
-
-
-
       </main>
     </div>
   )
