@@ -59,12 +59,6 @@ export default function ChatsPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                Coffee Chats
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Schedule coffee chats with E@B members! Please limit yourself to 3 chats. 
-              </p>
             </motion.div>
 
             {/* Airtable Embed */}
