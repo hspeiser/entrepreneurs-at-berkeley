@@ -23,26 +23,26 @@ const timeline = [
   },
   {
     phase: "Infosession 1",
-    date: "Sep 2",
+    date: "Sep 2 8 - 10 PM",
     description: "Learn about what we do, our mission, and our community!",
     status: "upcoming",
   },
   {
     phase: "Infosession 2",
-    date: "Sep 3",
+    date: "Sep 3 - 8 - 10 PM",
     description: "Same info as first one, feel free to come to one!",
     status: "upcoming",
   },
   {
     phase: "Diversity Night",
-    date: "Sep 4",
+    date: "Sep 4 - 8 - 10 PM",
     description: "Learn about our values and get your apps reviewed!",
     status: "upcoming",
   },
   {
     phase: "Applications Due",
-    date: "Sep 5, 12pm",
-    description: "Final deadline for submitting apps, make sure to submit by 12pm!",
+    date: "Sep 5, 6pm",
+    description: "Final deadline for submitting apps, make sure to submit by 6pm!",
     status: "upcoming",
   },
 ]
