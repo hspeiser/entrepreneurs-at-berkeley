@@ -44,7 +44,7 @@ export default function ChatsPage() {
               <p className="text-xl md:text-2xl lg:text-3xl text-blue-100 mb-12 max-w-4xl mx-auto font-light">
                 Connect with E@B members and learn about our community!
                 <br />
-                <span className="text-blue-300 font-semibold">Schedule Coffee Chats Below.</span>
+                <span className="text-blue-300 font-semibold">Schedule Coffee Chats Below. Please limit to 3 chats. </span>
               </p>
             </motion.div>
           </div>
