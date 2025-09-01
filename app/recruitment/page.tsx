@@ -23,20 +23,20 @@ const timeline = [
   },
   {
     phase: "Infosession 1",
-    date: "Sep 2, 8 - 10 PM",
+    date: "Sep 2, 6 - 8 PM @ bNorth 82D (MLK)",
     description: "Learn about what we do, our mission, and our community!",
     status: "upcoming",
   },
   {
     phase: "Infosession 2",
-    date: "Sep 3, 8 - 10 PM",
+    date: "Sep 3, 8 - 10 PM @ Dwinelle 247",
     description: "Same info as first one, feel free to come to one!",
     status: "upcoming",
   },
   {
     phase: "Diversity Night",
-    date: "Sep 4, 8 - 10 PM",
-    description: "Learn about our values and get your apps reviewed!",
+    date: "Sep 4, 6 - 8 PM @ bNorth 82D (MLK)",
+    description: "Learn about our values, members, interview process, and get your apps reviewed!",
     status: "upcoming",
   },
   {
