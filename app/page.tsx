@@ -79,70 +79,78 @@ export default function HomePage() {
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section className="relative overflow-hidden bg-white py-32 sm:py-44">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(16,42,114,0.12),_transparent_75%)]" aria-hidden="true" />
+          <motion.div
+            className="absolute inset-x-0 top-12 mx-auto h-72 w-72 rounded-full bg-[#1d34ff]/15 blur-3xl"
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.1, ease: "easeOut" }}
+          />
+          <div className="relative max-w-5xl mx-auto px-4 sm:px-6 text-center">
+            <div className="flex flex-col items-center gap-12">
+              <motion.div
+                initial={{ opacity: 0, y: -80 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.1, duration: 0.9, ease: "easeOut" }}
+                className="space-y-6 text-[#0b1c3d]"
+              >
+                <div className="flex flex-col items-center gap-6">
+                  <p className="text-2xl sm:text-4xl font-semibold tracking-[0.85em] text-[#1b44b5] uppercase">
+                    WE ARE
+                  </p>
+                  <RotatingText
+                    words={["FOUNDERS", "BUILDERS", "ENGINEERS", "THINKERS", "DESIGNERS", "WORLD-CHANGERS"]}
+                    interval={1400}
+                    className="text-5xl sm:text-6xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0b1c3d] via-[#1b44b5] to-[#5ca0ff]"
+                  />
+                </div>
+              </motion.div>
 
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-black text-foreground mb-6 leading-tight"
-            >
-              WE ARE
-              <br />
-              <RotatingText 
-                words={["FOUNDERS.", "BUILDERS.", "ENGINEERS.", "THINKERS.", "DESIGNERS.", "WORLD-CHANGERS."]}
-                interval={2200}
-                className="text-5xl md:text-7xl lg:text-8xl font-black"
-              />
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-12 max-w-4xl mx-auto font-light"
-            >
-              UC Berkeley's premier undergraduate entrepreneurship community for the next generation of founders. 
-              <br />
-            </motion.p>
-            
+              <motion.div
+                initial={{ opacity: 1, scale: 2.4 }}
+                animate={{ opacity: 1, scale: [2.4, 2.4, 1] }}
+                transition={{ duration: 2.4, ease: "easeInOut", times: [0, 0.6, 1] }}
+                className="flex items-center justify-center"
+              >
+                <Image
+                  src="/eb-logo.png"
+                  alt="Entrepreneurs @ Berkeley"
+                  width={160}
+                  height={160}
+                  className="h-24 w-24 sm:h-28 sm:w-28"
+                  priority
+                />
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.5, duration: 0.8, ease: "easeOut" }}
+                className="max-w-3xl text-lg sm:text-xl text-slate-600"
+              >
+                We launch products, partner with real clients, and join top accelerators before graduation.
+              </motion.p>
+            </div>
+
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+              transition={{ delay: 2.7, duration: 0.9, ease: "easeOut" }}
+              className="mt-16 overflow-hidden rounded-[44px] border border-slate-100 bg-white shadow-2xl"
             >
-              <Link href="/recruitment">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold w-full sm:w-auto animate-pulse-glow"
-                >
-                  JOIN US
-                  <ArrowRight className="ml-3 h-6 w-6" />
-                </Button>
-              </Link>
-              <Link href="/about">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="text-xl px-12 py-8 font-bold border-2 border-blue-500/30 hover:border-blue-500/60 hover:bg-blue-500/10 w-full sm:w-auto bg-transparent backdrop-blur-sm"
-                >
-                  LEARN MORE
-                </Button>
-              </Link>
+              <Image
+                src="/normal-e@b-group.jpg"
+                alt="Entrepreneurs @ Berkeley members"
+                width={1600}
+                height={900}
+                className="h-full w-full object-cover"
+                priority
+              />
             </motion.div>
           </div>
-          
-          <motion.div
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-          >
-            <ChevronDown className="h-8 w-8 text-blue-400" />
-          </motion.div>
         </section>
+
 
         {/* Partners Slider */}
         <section className="pt-8 pb-4 bg-gradient-to-b from-background to-background/95 backdrop-blur-sm relative overflow-hidden">
