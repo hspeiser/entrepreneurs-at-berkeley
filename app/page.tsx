@@ -1,6 +1,5 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Users, Rocket, TrendingUp, Award, ChevronDown, ArrowRight, Zap, Target, Globe, Crown, DollarSign } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -36,9 +35,9 @@ const allCompanies = [
 ]
 
 const partnerLogos = [
-  { name: "Google", logo: "/partners/1559064735Google-monochrome-logo-black.svg" },
   { name: "Pear VC", logo: "/partners/Pear_VC_logo.svg" },
-  { name: "Y Combinator", logo: "/partners/ycombinator-ar21.svg" },
+  { name: "YC", logo: "/yc-logo.png" },
+  { name: "SV Angel", logo: "/sv-angels-logo.png" },
   { name: "Haas", logo: "/partners/haas.svg" },
   { name: "Radical Ventures", logo: "/partners/radical-ventures-header-logo.svg" },
   { name: "Techstars", logo: "/partners/techstars-logo-vector-removebg-preview.svg" },
@@ -139,117 +138,87 @@ export default function HomePage() {
               transition={{ delay: 2.7, duration: 0.9, ease: "easeOut" }}
               className="mt-16 overflow-hidden rounded-[44px] border border-slate-100 bg-white shadow-2xl"
             >
-              <Image
-                src="/normal-e@b-group.jpg"
-                alt="Entrepreneurs @ Berkeley members"
-                width={1600}
-                height={900}
-                className="h-full w-full object-cover"
-                priority
-              />
+                  <Image
+                    src="/group-pictures/normal-e@b-group.jpg"
+                    alt="Entrepreneurs @ Berkeley members"
+                    width={1600}
+                    height={900}
+                    className="h-full w-full object-cover"
+                    priority
+                  />
             </motion.div>
           </div>
         </section>
 
 
-        {/* Partners Slider */}
-        <section className="pt-8 pb-4 bg-gradient-to-b from-background to-background/95 backdrop-blur-sm relative overflow-hidden">
-          <div className="w-full relative overflow-hidden py-2">
-            {/* Gradient overlays */}
-            <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-            
-            {/* Infinite scrolling container */}
-            <div className="flex animate-infinite-scroll">
-              {/* First set of logos */}
-              {partnerLogos.map((company, index) => {
-                const isLargerLogo = false;
-                return (
+        {/* Partners Showcase */}
+        <section className="relative overflow-hidden bg-[#f5f7ff] py-20">
+          <div className="absolute inset-x-0 top-6 mx-auto h-32 w-[90%] rounded-full bg-[#1d34ff]/10 blur-3xl" aria-hidden="true" />
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-12"
+            >
+              <p className="text-xs uppercase tracking-[0.5em] text-[#1b44b5]/70">Trusted by partners + accelerators</p>
+            </motion.div>
+
+            <div className="relative overflow-hidden">
+              <div className="absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-[#f5f7ff] to-transparent pointer-events-none" aria-hidden="true" />
+              <div className="absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-[#f5f7ff] to-transparent pointer-events-none" aria-hidden="true" />
+              <div className="flex gap-8 animate-infinite-scroll" style={{ animationDuration: "18s" }}>
+                {[...partnerLogos, ...partnerLogos].map((company, index) => (
                   <div
-                    key={`partner-first-${company.name}-${index}`}
-                    className={`flex-shrink-0 mx-4 flex items-end justify-center ${isLargerLogo ? 'w-80 h-40' : 'w-48 h-20'}`}
+                    key={`${company.name}-${index}`}
+                    className="flex-shrink-0 rounded-2xl border border-[#0b1c3d]/10 bg-white/80 px-8 py-6 flex items-center justify-center shadow-sm min-w-[180px]"
                   >
                     <Image
                       src={company.logo || "/placeholder.svg"}
                       alt={`${company.name} logo`}
-                      width={isLargerLogo ? 320 : 160}
-                      height={isLargerLogo ? 160 : 60}
-                      className="opacity-60 hover:opacity-90 transition-opacity duration-300 object-contain brightness-0 invert"
-                      style={{
-                        filter: 'brightness(0) invert(1) opacity(0.6)',
-                        width: isLargerLogo ? '320px' : '160px',
-                        height: isLargerLogo ? '160px' : '60px',
-                        objectFit: 'contain'
-                      }}
+                      width={160}
+                      height={60}
+                      className="h-10 w-auto object-contain opacity-80"
                     />
                   </div>
-                );
-              })}
-              
-              {/* Duplicate set for seamless loop */}
-              {partnerLogos.map((company, index) => {
-                const isLargerLogo = false;
-                return (
-                  <div
-                    key={`partner-second-${company.name}-${index}`}
-                    className={`flex-shrink-0 mx-4 flex items-end justify-center ${isLargerLogo ? 'w-80 h-40' : 'w-48 h-20'}`}
-                  >
-                    <Image
-                      src={company.logo || "/placeholder.svg"}
-                      alt={`${company.name} logo`}
-                      width={isLargerLogo ? 320 : 160}
-                      height={isLargerLogo ? 160 : 60}
-                      className="opacity-60 hover:opacity-90 transition-opacity duration-300 object-contain brightness-0 invert"
-                      style={{
-                        filter: 'brightness(0) invert(1) opacity(0.6)',
-                        width: isLargerLogo ? '320px' : '160px',
-                        height: isLargerLogo ? '160px' : '60px',
-                        objectFit: 'contain'
-                      }}
-                    />
-                  </div>
-                );
-              })}
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Impact Stats */}
-        <section className="py-16 bg-gradient-to-b from-background to-background/95 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden bg-white py-24">
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#e9efff] to-transparent" aria-hidden="true" />
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-center mb-20"
+              transition={{ duration: 0.7 }}
+              className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6">
-                <span className="gradient-text">IMPACT</span> BY THE NUMBERS
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Our track record speaks for itself. We don't just talk about changing the world. 
-                <span className="text-primary font-semibold"> We do it.</span>
-              </p>
+              <p className="text-xs uppercase tracking-[0.5em] text-[#1b44b5]/80">Impact by the numbers</p>
+              <h2 className="mt-4 text-4xl sm:text-5xl font-black text-[#0b1c3d]">Proof, not promises.</h2>
             </motion.div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="rounded-[28px] border border-[#1b44b5]/15 bg-[#f8faff] px-6 py-8 shadow-sm"
                 >
-                  <Card className="text-center p-8 bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:scale-105 backdrop-blur-sm h-80 flex flex-col justify-center">
-                    <CardContent className="p-0">
-                      <stat.icon className="h-12 w-12 text-blue-500 mx-auto mb-6" />
-                      <div className="text-5xl md:text-6xl font-black text-foreground mb-3 gradient-text">{stat.number}</div>
-                      <div className="text-lg font-bold text-foreground mb-2">{stat.label}</div>
-                      <div className="text-sm text-muted-foreground">{stat.description}</div>
-                    </CardContent>
-                  </Card>
+                  <div className="flex items-center gap-3 text-[#1b44b5] text-sm font-semibold uppercase tracking-[0.3em]">
+                    <stat.icon className="h-6 w-6" />
+                    {stat.label}
+                  </div>
+                  <div className="mt-6 text-4xl sm:text-5xl font-black text-[#0b1c3d]">{stat.number}</div>
+                  <p className="mt-2 text-sm text-slate-500">{stat.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -259,75 +228,52 @@ export default function HomePage() {
 
 
         {/* Community Section */}
-        <section className="py-16 bg-gradient-to-b from-background to-background/95 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative bg-[#f5f7ff] py-24">
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/60 to-transparent" aria-hidden="true" />
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-center mb-20"
+              className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6">
-                WHAT <span className="gradient-text">WE DO</span>
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                We provide resources and opportunities so student founders can be the 
-                <span className="text-primary font-semibold"> the best of the best.</span>
+              <p className="text-xs uppercase tracking-[0.5em] text-[#1b44b5]/70">What we do</p>
+              <h2 className="mt-4 text-4xl md:text-5xl font-black text-[#0b1c3d]">Build, launch, and back founders.</h2>
+              <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+                Incubator sprints, client labs, venture dinners, and the pipelines that help Berkeley founders move fast.
               </p>
             </motion.div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                {
-                  src: "/group_photo_make_sure_its_small.jpg",
-                  title: "Incubator + Demo Day",
-                  description: "Sponsored by Techstars."
-                },
-                {
-                  src: "/panel_of_smart_people.jpg",
-                  title: "Build Sessions + Hackathons",
-                  description: "Bring your idea to life. "
-                },
-                {
-                  src: "/founder_dinner.jpg",
-                  title: "Founder Dinners",
-                  description: "Build community."
-                },
-                {
-                  src: "/202411241117_E@BClubShoot_0542_5D Mark IV.jpg",
-                  title: "Projects",
-                  description: "Real client work with top companies and startups."
-                },
-                {
-                  src: "/dude_looking_focused.JPG",
-                  title: "Funding + Venture",
-                  description: "Networking events, 1:1s with VCs, Fireside chats, and more."
-                },
-                {
-                  src: "/techstars.png",
-                  title: "Talent Pipeline",
-                  description: "Trusted by VCs to fund your startup."
-                },
+                { src: "/group_photo_make_sure_its_small.jpg", title: "Incubator + Demo Day", description: "12-week build sprints and a packed demo room." },
+                { src: "/panel_of_smart_people.jpg", title: "Build Sessions", description: "Product critiques with alumni and visiting partners." },
+                { src: "/founder_dinner.jpg", title: "Founder Dinners", description: "Small table conversations with the operators we admire." },
+                { src: "/202411241117_E@BClubShoot_0542_5D Mark IV.jpg", title: "Client Lab", description: "Paid engagements with Bay Area startups and funds." },
+                { src: "/dude_looking_focused.JPG", title: "Capital Network", description: "SkyDeck, YC, and venture intros when you’re ready." },
+                { src: "/techstars.png", title: "Talent Pipeline", description: "We source teams for VC scouts, accelerators, and labs." },
               ].map((item, index) => (
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.95, y: 30 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  key={item.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
                   viewport={{ once: true }}
-                  className="relative group overflow-hidden rounded-xl aspect-[4/3]"
+                  className="relative overflow-hidden rounded-[28px] border border-white/60 bg-white shadow-lg"
                 >
-                  <Image
-                    src={item.src || "/placeholder.svg?height=300&width=400&query=community+event"}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="font-bold text-2xl text-white mb-2">{item.title}</h3>
-                    <p className="text-blue-200 text-sm">{item.description}</p>
+                  <div className="aspect-[4/3] relative">
+                    <Image
+                      src={item.src}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b1c3d]/80 via-transparent to-transparent" />
+                  </div>
+                  <div className="p-6 text-left">
+                    <h3 className="text-2xl font-semibold text-[#0b1c3d]">{item.title}</h3>
+                    <p className="mt-2 text-sm text-slate-600">{item.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -336,118 +282,117 @@ export default function HomePage() {
         </section>
 
         {/* Companies Section */}
-        <section className="py-20 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-sm font-bold uppercase text-blue-400 tracking-widest mb-4">
-                OUR ALUMNI BUILD AT THE BEST
-              </h2>
-              <p className="text-2xl font-bold text-foreground">
-                From startups to <span className="gradient-text">global empires</span>
-              </p>
-            </motion.div>
-          </div>
-          
-          <div className="w-full relative overflow-hidden py-8">
-            {/* Gradient overlays */}
-            <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-            
-            {/* Infinite scrolling container */}
-            <div className="flex animate-infinite-scroll">
-              {/* First set of logos */}
-              {allCompanies.map((company, index) => (
-                <div
-                  key={`logo-first-${company.name}-${index}`}
-                  className="flex-shrink-0 mx-6 flex items-center justify-center w-48 h-24"
-                >
-                  <Image
-                    src={company.logo || "/placeholder.svg"}
-                    alt={`${company.name} logo`}
-                    width={180}
-                    height={75}
-                    className="opacity-60 hover:opacity-90 transition-opacity duration-300 object-contain brightness-0 invert"
-                    style={{
-                      filter: 'brightness(0) invert(1) opacity(0.6)',
-                      maxWidth: '180px',
-                      maxHeight: '75px',
-                      width: 'auto',
-                      height: 'auto'
-                    }}
-                  />
+        <section className="relative bg-white py-24">
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#eef2ff] to-transparent" aria-hidden="true" />
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-[1fr_1.3fr] items-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="space-y-6"
+              >
+                <p className="text-xs uppercase tracking-[0.5em] text-[#1b44b5]/80">Where our alumni ship</p>
+                <h3 className="text-4xl sm:text-5xl font-black text-[#0b1c3d]">From YC to FAANG </h3>
+                <p className="text-slate-600">
+                  Members build at top accelerators, venture studios, and design forward product teams. We learn from these ecosystems and send founders back with more reps.
+                </p>
+                <div className="grid grid-cols-2 gap-4 text-left text-sm text-slate-600">
+                  <div className="rounded-2xl border border-[#1b44b5]/15 bg-[#f5f7ff] p-4">
+                    <p className="text-xl font-bold text-[#0b1c3d]">6</p>
+                    <p>SkyDeck-backed teams in 2024</p>
+                  </div>
+                  <div className="rounded-2xl border border-[#1b44b5]/15 bg-[#f5f7ff] p-4">
+                    <p className="text-xl font-bold text-[#0b1c3d]">3</p>
+                    <p>YC acceptances from undergrads</p>
+                  </div>
                 </div>
-              ))}
-              
-              {/* Duplicate set for seamless loop */}
-              {allCompanies.map((company, index) => (
-                <div
-                  key={`logo-second-${company.name}-${index}`}
-                  className="flex-shrink-0 mx-6 flex items-center justify-center w-48 h-24"
-                >
-                  <Image
-                    src={company.logo || "/placeholder.svg"}
-                    alt={`${company.name} logo`}
-                    width={180}
-                    height={75}
-                    className="opacity-60 hover:opacity-90 transition-opacity duration-300 object-contain brightness-0 invert"
-                    style={{
-                      filter: 'brightness(0) invert(1) opacity(0.6)',
-                      maxWidth: '180px',
-                      maxHeight: '75px',
-                      width: 'auto',
-                      height: 'auto'
-                    }}
-                  />
-                </div>
-              ))}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="grid grid-cols-2 sm:grid-cols-3 gap-4"
+              >
+                {allCompanies.slice(0, 12).map((company) => (
+                  <div
+                    key={company.name}
+                    className="rounded-2xl border border-[#0b1c3d]/10 bg-[#f8faff] px-4 py-6 flex items-center justify-center"
+                  >
+                    <Image
+                      src={company.logo || "/placeholder.svg"}
+                      alt={`${company.name} logo`}
+                      width={120}
+                      height={48}
+                      className="h-10 w-auto object-contain opacity-80"
+                    />
+                  </div>
+                ))}
+              </motion.div>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-b from-background to-background/95 backdrop-blur-sm">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
+        <section className="relative overflow-hidden bg-[#0b1c3d] py-24 text-white">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(29,52,255,0.3),_transparent_70%)]" aria-hidden="true" />
+          <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-10">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-xs uppercase tracking-[0.6em] text-white/60"
             >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-8">
-                READY TO <span className="gradient-text">CHANGE THE WORLD?</span>
-              </h2>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto">
-                Join Berkeley's premier entrepreneurship club and transform your ideas into reality.
-                <br />
-                <span className="text-primary font-semibold">Join E@B.</span>
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Link href="https://forms.gle/Py8cwGjt3kJCrRLH7" target="_blank" rel="noopener noreferrer">
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"
-                  >
-                    APPLY NOW
-                    <ArrowRight className="ml-3 h-6 w-6" />
-                  </Button>
-                </Link>
-                <Link href="/about">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="text-xl px-12 py-8 font-bold border-2 border-blue-500/30 hover:border-blue-500/60 hover:bg-blue-500/10 bg-transparent backdrop-blur-sm"
-                  >
-                    LEARN MORE
-                  </Button>
-                </Link>
-              </div>
+              Ready to build?
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, delay: 0.1 }}
+              className="text-4xl sm:text-5xl font-black"
+            >
+              Join the next E@B build cycle.
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, delay: 0.2 }}
+              className="text-lg text-white/80"
+            >
+              Show us what you're making, or come find your co-founders. We review applications on a rolling basis and tap you for the next sprint.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <Link href="https://forms.gle/Py8cwGjt3kJCrRLH7" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto bg-white text-[#0b1c3d] px-10 py-6 text-base font-semibold shadow-lg hover:bg-white/90"
+                >
+                  Apply now
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/about" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto border-white/40 text-white hover:bg-white/10 px-10 py-6 text-base font-semibold"
+                >
+                  Learn more
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </section>

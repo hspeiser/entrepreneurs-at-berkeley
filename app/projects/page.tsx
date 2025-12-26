@@ -1,497 +1,395 @@
 "use client"
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, ExternalLink, Github, Lightbulb, Building2, Car, Pill, Users, TrendingUp, BarChart, Target, Rocket, Zap } from "lucide-react"
+import { ArrowRight, Code2, Layout, Sparkles, MessageSquare, CheckCircle2, ArrowUpRight, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { Navbar } from "@/components/layout/navbar"
-import NeuralNetworkCanvas from "@/components/ui/neural-network-canvas"
+import { useRef, useState } from "react"
+import { cn } from "@/lib/utils"
 
-const featuredProjects = [
+const projects = [
   {
-    company: "LinkedIn",
-    description: "Rebuilt LinkedIn's user interface for Japan with a Gen-Z focus. Proposed key feature changes, university partnerships and a comprehensive 18-month product roadmap.",
-    category: "UI/UX Design & Product Strategy",
-    logo: "/linkedin.png",
-    color: "from-blue-400 to-cyan-400",
-    tags: ["UI/UX", "Product Strategy", "Roadmapping"]
+    client: "LinkedIn",
+    title: "Gen Z User Acquisition",
+    description: "Reimagined the mobile experience for the Japanese market. Designed a new 'Lite' interface.",
+    image: "/linkedin.png", 
+    tags: ["UI/UX", "Strategy"],
+    color: "#0077b5",
+    year: "2024"
   },
   {
-    company: "Tesla",
-    description: "Proposed AI-powered energy management system for Tesla stores and dealerships. Used pattern recognition to automatically detect issues and predict which chargers need maintenance before they fail.",
-    category: "AI Commercialization & GTM",
-    logo: "/tesla.svg",
-    color: "from-red-400 to-pink-400",
-    tags: ["AI", "Energy Management", "Predictive Analytics"]
+    client: "Tesla",
+    title: "Predictive Maintenance",
+    description: "Anomaly detection pipeline for Powerwall. Identifies voltage irregularities 2 weeks early.",
+    image: "/logos/tesla.svg",
+    tags: ["ML", "Python"],
+    color: "#cc0000",
+    year: "2023"
   },
   {
-    company: "PBS",
-    description: "Strategic analysis for PBS Kids to enhance engagement across the United States. Examined Gen Z content consumption habits, social media's role, vertical video trends, and AI's potential impact on educational content.",
-    category: "AI Strategy & Market Research",
-    logo: "/pbs.png",
-    color: "from-green-400 to-emerald-400",
-    tags: ["AI Strategy", "Market Research", "Gen Z"]
-  },
+    client: "PBS",
+    title: "AI Content Strategy",
+    description: "Recommendation engine aligning educational goals with viewing trends.",
+    image: "/pbs.png",
+    tags: ["AI", "Data"],
+    color: "#00aeef",
+    year: "2024"
+  }
 ]
 
-
-
-const differentiators = [
+const processSteps = [
   {
-    title: "Top-tier Talent",
-    description:
-      "All members are hand-selected builders, designers, and founders from UC Berkeley. Think of us as a first filter for people you want in your company.",
-    icon: Users,
-    color: "from-blue-400 to-cyan-400",
+    id: "01",
+    title: "Scope & Squad",
+    shortDesc: "Embed PM & Tech Lead",
+    description: "We don't just take a ticket. We embed a PM and Tech Lead to challenge your assumptions, refine the problem statement, and define clear success metrics before writing a single line of code.",
+    icon: MessageSquare,
+    color: "bg-blue-500"
   },
   {
-    title: "Founder-first Mindset",
-    description:
-      "Many of us have launched VC-backed startups, participated in Y Combinator, or built and shipped high-impactproducts.",
-    icon: Rocket,
-    color: "from-purple-400 to-pink-400",
+    id: "02",
+    title: "Sprint Zero",
+    shortDesc: "Setup & Architecture",
+    description: "Week 1 is pure intensity. We align on the technical stack, set up the repo and CI/CD pipelines, and deliver initial high-fidelity mocks. We ship to production from day one.",
+    icon: Sparkles,
+    color: "bg-purple-500"
   },
   {
-    title: "High Execution Velocity",
-    description:
-      "We operate like a lean startup team: fast iterations, clear communication, and product ownership from day one.",
-    icon: Target,
-    color: "from-green-400 to-emerald-400",
+    id: "03",
+    title: "Build & Iterate",
+    shortDesc: "2-Week Sprints",
+    description: "We run rigorous two-week sprints with live demos. We work directly in your Slack, push code to your GitHub, and pivot fast based on your real-time feedback.",
+    icon: Code2,
+    color: "bg-indigo-500"
   },
   {
-    title: "Multi-disciplinary Skill Sets",
-    description:
-      "Our teams blend deep technical knowledge (ML, infra, AI agents) with strategic thinking (GTM, ops, AI commercialization).",
-    icon: Lightbulb,
-    color: "from-orange-400 to-red-400",
-  },
-  {
-    title: "Real Project Commitment",
-    description:
-      "Every team member commits 10+ hours/week, ensuring consistent progress and high-quality outcomes.",
-    icon: Zap,
-    color: "from-yellow-400 to-orange-400",
-  },
-  {
-    title: "Proven Industry Impact",
-    description:
-      "We've already delivered value to 15+ Fortune 500 Companies and high growth startups across Finance, Healthcare, and Technology.",
-    icon: TrendingUp,
-    color: "from-emerald-400 to-teal-400",
-  },
+    id: "04",
+    title: "Handoff",
+    shortDesc: "Docs & Transfer",
+    description: "We don't lock you in. You get the code, the documentation, the design files, and a clean IP transfer. We often onboard your full-time engineers to take over the codebase.",
+    icon: CheckCircle2,
+    color: "bg-emerald-500"
+  }
 ]
 
 export default function ProjectsPage() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  })
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <NeuralNetworkCanvas />
+    <div className="min-h-screen bg-[#fcfcfc] text-[#0b1c3d] overflow-x-hidden selection:bg-[#1b44b5] selection:text-white" ref={containerRef}>
       <Navbar />
       
-      <main className="relative z-10 pt-24">
-        {/* Hero Section with Background Image */}
-        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-          {/* Background Image */}
-          <div className="absolute inset-0">
-            <Image
-              src="/202411241117_E@BClubShoot_0542_5D Mark IV.jpg"
-              alt="E&B Professional Team Meeting"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-purple-900/30" />
-          </div>
-          
-          {/* Hero Content */}
-          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm">
-                <Lightbulb className="w-4 h-4 mr-2" />
-                WORK WITH INDUSTRY LEADERS
-              </div>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-tight">
-                OUR <span className="gradient-text">PROJECTS</span>
-              </h1>
-              <p className="text-xl md:text-2xl lg:text-3xl text-blue-100 mb-12 max-w-4xl mx-auto font-light">
-                Not case studies. Delivering real value to Fortune 500 companies and high-growth startups.
-                <br />
-                <span className="text-blue-300 font-semibold">We ship fast.</span>
-              </p>
-            </motion.div>
+      {/* Smooth Scroll Progress Bar */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-[#1b44b5] origin-left z-50"
+        style={{ scaleX: scrollYProgress }}
+      />
 
-          </div>
-        </section>
+      <main className="relative pt-24 pb-0">
+        
+        {/* Hero */}
+        <section className="relative min-h-[90vh] flex flex-col justify-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden rounded-[3rem] mb-20">
+           {/* Background Image with Overlay */}
+           <div className="absolute inset-0 z-0">
+              <Image 
+                src="/group-pictures/epsilon-alpha-beta.jpg"
+                alt="E@B Group Photo"
+                fill
+                className="object-cover object-center"
+                priority
+              />
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-[1px]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent" />
+           </div>
 
-        {/* Our Past Clients */}
-        <section className="py-16 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-8"
-            >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4">
-                OUR PAST <span className="gradient-text">CLIENTS</span>
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                We've worked with industry leaders, startups and Fortune 500 companies across technology, finance, and healthcare
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
-              className="flex justify-center"
-            >
-              <div className="relative max-w-6xl w-full">
-                <Image
-                  src="/clients.png"
-                  alt="Our Past Clients - Fortune 500 Companies and Industry Leaders"
-                  width={1200}
-                  height={600}
-                  className="w-full h-auto"
-                  priority
-                />
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* What We Offer */}
-        <section className="py-16 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6">
-                WHAT WE <span className="gradient-text">OFFER</span>
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                We do both technical and strategy projects, delivering end-to-end solutions with elite execution
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="h-full"
-              >
-                <Card className="p-8 bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm h-full">
-                  <CardContent className="p-0 h-full flex flex-col">
-                    <h3 className="text-2xl font-black text-foreground mb-6 flex items-center">
-                      <Users className="w-6 h-6 text-blue-400 mr-3" />
-                      DELIVERY <span className="gradient-text ml-2">TEAMS</span>
-                    </h3>
-                    <div className="space-y-4 text-muted-foreground flex-1">
-                      <p className="text-lg leading-relaxed">
-                        <span className="text-primary font-semibold">End-to-end delivery teams of 5–6 students,</span> each led by a dedicated project lead
-                      </p>
-                      <p className="text-lg leading-relaxed">
-                        <span className="text-primary font-semibold">Weekly syncs and sprints</span> with clear milestones and demo-ready progress, adapting to your team
-                      </p>
-                      <p className="text-lg leading-relaxed">
-                        <span className="text-primary font-semibold">Mid-semester and Final deliverables,</span> slide decks, and clear and concise documentation
-                      </p>
-                      <p className="text-lg leading-relaxed">
-                        <span className="text-primary font-semibold">Flexible project start,</span> kick off anytime during semester
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="h-full"
-              >
-                <Card className="p-8 bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm h-full">
-                  <CardContent className="p-0 h-full flex flex-col">
-                    <h3 className="text-2xl font-black text-foreground mb-6 flex items-center">
-                      <Lightbulb className="w-6 h-6 text-blue-400 mr-3" />
-                      EXPERTISE <span className="gradient-text ml-2">AREAS</span>
-                    </h3>
-                    <div className="space-y-4 text-muted-foreground flex-1">
-                      <p className="text-lg leading-relaxed">
-                        <span className="text-primary font-semibold">Deep technical expertise</span> in LLMs, agents, dev tools, enterprise infra, and ML systems
-                      </p>
-                      <p className="text-lg leading-relaxed">
-                        <span className="text-primary font-semibold">Cross-functional capability</span> across strategy, product, and engineering
-                      </p>
-                      <p className="text-lg leading-relaxed">
-                        <span className="text-primary font-semibold">Comprehensive skills</span> spanning business, product GTM, economics, strategy, and product ops
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <h3 className="text-3xl md:text-4xl font-black text-foreground mb-8">
-                WHAT WE'RE <span className="gradient-text">GOOD AT</span> 
-              </h3>
-            </motion.div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <Card className="p-6 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/30 backdrop-blur-sm">
-                  <CardContent className="p-0">
-                    <h4 className="text-xl font-black text-foreground mb-4 flex items-center">
-                      <Zap className="w-5 h-5 text-blue-400 mr-3" />
-                      TECHNICAL
-                    </h4>
-                    <div className="space-y-3">
-                      <div className="p-3 bg-blue-500/5 rounded-lg border border-blue-500/20">
-                        <h5 className="font-semibold text-foreground text-sm">LLM-Powered Product Prototyping & Infra Scaling</h5>
-                      </div>
-                      <div className="p-3 bg-blue-500/5 rounded-lg border border-blue-500/20">
-                        <h5 className="font-semibold text-foreground text-sm">ML and UI/UX Design</h5>
-                      </div>
-                      <div className="p-3 bg-blue-500/5 rounded-lg border border-blue-500/20">
-                        <h5 className="font-semibold text-foreground text-sm">AI Growth and Tooling for Enterprises/Regulated Industries</h5>
-                      </div>
-                      <div className="p-3 bg-blue-500/5 rounded-lg border border-blue-500/20">
-                        <h5 className="font-semibold text-foreground text-sm">Hardware-Aware AI & Systems Optimization</h5>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                <Card className="p-6 bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/30 backdrop-blur-sm">
-                  <CardContent className="p-0">
-                    <h4 className="text-xl font-black text-foreground mb-4 flex items-center">
-                      <Target className="w-5 h-5 text-purple-400 mr-3" />
-                      STRATEGY
-                    </h4>
-                    <div className="space-y-3">
-                      <div className="p-3 bg-purple-500/5 rounded-lg border border-purple-500/20">
-                        <h5 className="font-semibold text-foreground text-sm">AI Commercialization & GTM for Deep Tech</h5>
-                      </div>
-                      <div className="p-3 bg-purple-500/5 rounded-lg border border-purple-500/20">
-                        <h5 className="font-semibold text-foreground text-sm">Market Sizing + Ecosystem Mapping for Technical Products</h5>
-                      </div>
-                      <div className="p-3 bg-purple-500/5 rounded-lg border border-purple-500/20">
-                        <h5 className="font-semibold text-foreground text-sm">Talent Scouting</h5>
-                      </div>
-                      <div className="p-3 bg-purple-500/5 rounded-lg border border-purple-500/20">
-                        <h5 className="font-semibold text-foreground text-sm">Market Segmentation</h5>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Projects */}
-        <section className="py-16 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6">
-                FEATURED <span className="gradient-text">PROJECTS</span>
-              </h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredProjects.map((project, index) => (
-                <motion.div
-                  key={project.company}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.02 }}
-                  className="perspective-1000"
-                >
-                  <Card className="p-6 bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm relative overflow-hidden group h-full">
-                    <motion.div 
-                      className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
-                    />
-                    <CardContent className="p-0 relative z-10 h-full flex flex-col">
-                      <div className="flex items-center mb-4">
-                        <motion.div
-                          className={`w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-3 shadow-lg border border-gray-200`}
-                          whileHover={{ rotate: 360 }}
-                          transition={{ duration: 0.6 }}
-                        >
-                          <Image
-                            src={project.logo}
-                            alt={`${project.company} logo`}
-                            width={project.company === "Tesla" ? 40 : 24}
-                            height={project.company === "Tesla" ? 40 : 24}
-                            className={`${project.company === "Tesla" ? "w-10 h-10" : "w-6 h-6"} object-contain`}
-                          />
-                        </motion.div>
-                        <div>
-                          <div className="text-xs font-bold text-blue-400 uppercase tracking-wider">{project.company}</div>
-                          <div className="text-xs text-muted-foreground">{project.category}</div>
-                        </div>
-                      </div>
-                      
-
-                      
-                                            <p className="text-sm text-muted-foreground mb-2 leading-relaxed flex-1">
-                        {project.description}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-1">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-1 bg-blue-500/10 text-blue-400 text-xs font-medium rounded-full border border-blue-500/20"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* What Differentiates Us */}
-        <section className="py-16 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6">
-                WHAT SETS US <span className="gradient-text">APART</span>
-              </h2>
-              <p className="text-xl text-muted-foreground">We're not your typical consulting club.</p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {differentiators.map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.02, rotateY: 2 }}
-                  className="perspective-1000"
-                >
-                  <Card className="p-6 h-full bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm group">
-                    <motion.div
-                      className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg`}
-                    />
-                    <CardContent className="p-0 relative z-10">
-                      <motion.div
-                        className={`w-12 h-12 bg-gradient-to-r ${item.color} rounded-lg flex items-center justify-center mb-4 shadow-lg`}
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <item.icon className="h-6 w-6 text-white" />
-                      </motion.div>
-                      <h3 className="text-xl font-black text-foreground mb-3">{item.title}</h3>
-                      <p className="text-muted-foreground">{item.description}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-b from-background to-background/95 backdrop-blur-sm">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-8">
-                WANT TO <span className="gradient-text">WORK WITH US?</span>
-              </h2>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto">
-                Work with top Berkeley builders to provide value to your company
-                <br />
-                <span className="text-primary font-semibold">Let's build something amazing together.</span>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-10 max-w-4xl"
+          >
+            <h1 className="text-[12vw] leading-[0.85] font-black tracking-tighter text-[#0b1c3d] mb-8 mix-blend-color-burn opacity-90">
+              WE SHIP<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1b44b5] to-[#3b82f6] animate-gradient-x">
+                FUTURE
+              </span>
+            </h1>
+            
+            <div className="flex flex-col md:flex-row gap-8 items-start md:items-end justify-between mt-12">
+              <p className="text-xl md:text-3xl font-medium text-slate-800 max-w-xl leading-relaxed">
+                A high-velocity product studio at UC Berkeley. We build software that matters.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link href="/recruitment">
-                    <Button
-                      size="lg"
-                      className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"
-                    >
-                      JOIN THE TEAM
-                      <ArrowRight className="ml-3 h-6 w-6" />
-                    </Button>
-                  </Link>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <a href="mailto:vihaanm@berkeley.edu">
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="text-xl px-12 py-8 font-bold border-2 border-blue-500/30 hover:border-blue-500/60 hover:bg-blue-500/10 bg-transparent backdrop-blur-sm"
-                    >
-                      PARTNER WITH US
-                    </Button>
-                  </a>
-                </motion.div>
+              <div className="flex gap-4">
+                 <MagneticButton>
+                    <Link href="mailto:contact@entrepreneursatberkeley.com" className="flex items-center gap-2 px-8 py-4 bg-[#0b1c3d] text-white rounded-full font-bold text-lg hover:bg-[#1b44b5] transition-colors shadow-2xl shadow-blue-900/20">
+                      Start a Project <ArrowUpRight className="w-5 h-5" />
+                    </Link>
+                 </MagneticButton>
               </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Client Logos */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-16">
+               <h3 className="text-sm font-bold tracking-[0.2em] text-[#1b44b5] uppercase">Sample of our past clients</h3>
+               <div className="h-px flex-1 bg-slate-100 hidden md:block ml-8" />
+            </div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative w-full"
+            >
+              <Image 
+                src="/clients.png" 
+                alt="Our Clients: Google, Tesla, Spotify, etc." 
+                width={1200}
+                height={600}
+                className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100"
+              />
             </motion.div>
           </div>
         </section>
+
+        {/* Interactive Process (Swapped Position) */}
+        <section className="py-32 bg-[#0b1c3d] text-white rounded-[3rem] mx-4 sm:mx-6 lg:mx-8 relative overflow-hidden mb-32">
+          {/* Background Gradient */}
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#1b44b5]/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24">
+              <div className="lg:sticky lg:top-32 h-fit">
+                <h2 className="text-5xl md:text-7xl font-black mb-6">How We <br /><span className="text-[#3b82f6]">Ship.</span></h2>
+                <p className="text-xl text-slate-300 max-w-md leading-relaxed mb-8">
+                   We've refined our process over 60+ projects. Click through our sprint cycle to see how we deliver.
+                </p>
+                <div className="hidden lg:block">
+                   <Link href="mailto:contact@entrepreneursatberkeley.com">
+                      <Button className="bg-white text-[#0b1c3d] hover:bg-slate-100 rounded-full px-8 py-6 text-lg font-bold shadow-lg shadow-white/10">
+                        Start a Sprint
+                      </Button>
+                   </Link>
+                </div>
+              </div>
+
+              {/* Interactive Component */}
+              <InteractiveProcessList />
+            </div>
+          </div>
+        </section>
+
+        {/* Selected Work (Swapped Position) */}
+        <section className="py-32 bg-[#fcfcfc]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 flex items-end justify-between">
+            <div>
+              <h2 className="text-5xl md:text-6xl font-black text-[#0b1c3d] tracking-tight mb-4">Selected Work</h2>
+              <p className="text-slate-500 text-lg">Case studies from our recent sprints.</p>
+            </div>
+            <div className="hidden md:flex gap-2">
+               <ArrowRight className="w-6 h-6 text-slate-300" />
+            </div>
+          </div>
+
+          <div className="overflow-x-auto pb-12 px-4 sm:px-6 lg:px-8 -mx-4 sm:-mx-6 lg:-mx-8 scrollbar-hide">
+             <div className="flex gap-6 w-max mx-auto lg:mx-0">
+               {projects.map((project, i) => (
+                 <ProjectCard key={i} project={project} index={i} />
+               ))}
+               
+               {/* "More" Card */}
+               <motion.div 
+                 initial={{ opacity: 0, x: 20 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 transition={{ delay: 0.3 }}
+                 className="w-[300px] md:w-[350px] aspect-[4/5] rounded-[2rem] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center p-8 hover:bg-slate-50 transition-colors cursor-pointer group"
+               >
+                 <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <ArrowRight className="w-6 h-6 text-slate-400" />
+                 </div>
+                 <h3 className="text-xl font-bold text-[#0b1c3d]">View Archive</h3>
+                 <p className="text-sm text-slate-500 mt-2">Explore 50+ past projects</p>
+               </motion.div>
+             </div>
+          </div>
+        </section>
+
       </main>
     </div>
   )
-} 
+}
+
+function InteractiveProcessList() {
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  return (
+    <div className="flex flex-col gap-4">
+      {processSteps.map((step, index) => (
+        <motion.div
+          key={step.id}
+          className={cn(
+            "relative overflow-hidden rounded-3xl border transition-all duration-500 cursor-pointer",
+            activeIndex === index 
+              ? "bg-white/10 border-white/20" 
+              : "bg-transparent border-white/5 hover:bg-white/5"
+          )}
+          onClick={() => setActiveIndex(index)}
+          initial={false}
+          animate={{
+             height: activeIndex === index ? "auto" : "100px" 
+          }}
+        >
+          <div className="p-8 flex items-start gap-6">
+            <div className={cn(
+               "w-12 h-12 rounded-full flex items-center justify-center text-white shrink-0 transition-colors duration-500",
+               activeIndex === index ? step.color : "bg-white/10"
+            )}>
+              <step.icon className="w-6 h-6" />
+            </div>
+            
+            <div className="flex-1">
+               <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-4">
+                     <span className="text-sm font-bold text-white/40 uppercase tracking-widest">{step.id}</span>
+                     <h3 className={cn(
+                        "text-2xl font-bold transition-colors duration-300",
+                        activeIndex === index ? "text-white" : "text-white/60"
+                     )}>
+                        {step.title}
+                     </h3>
+                  </div>
+                  <ChevronRight className={cn(
+                     "w-6 h-6 text-white/40 transition-transform duration-300",
+                     activeIndex === index ? "rotate-90" : "rotate-0"
+                  )} />
+               </div>
+               
+               <AnimatePresence>
+                 {activeIndex === index && (
+                   <motion.div
+                     initial={{ opacity: 0, height: 0 }}
+                     animate={{ opacity: 1, height: "auto" }}
+                     exit={{ opacity: 0, height: 0 }}
+                     transition={{ duration: 0.3 }}
+                   >
+                     <p className="text-xl text-slate-300 leading-relaxed mt-4 pb-2">
+                       {step.description}
+                     </p>
+                   </motion.div>
+                 )}
+               </AnimatePresence>
+               
+               {activeIndex !== index && (
+                  <motion.p 
+                     initial={{ opacity: 0 }}
+                     animate={{ opacity: 1 }}
+                     className="text-slate-500 mt-1"
+                  >
+                     {step.shortDesc}
+                  </motion.p>
+               )}
+            </div>
+          </div>
+          
+          {/* Active Indicator Bar */}
+          {activeIndex === index && (
+             <motion.div 
+               layoutId="active-bar"
+               className={cn("absolute left-0 top-0 bottom-0 w-1", step.color)}
+             />
+          )}
+        </motion.div>
+      ))}
+    </div>
+  )
+}
+
+
+function ProjectCard({ project, index }: { project: any, index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      whileHover={{ y: -10 }}
+      className="group relative w-[300px] md:w-[400px] h-[500px] rounded-[2rem] overflow-hidden bg-white shadow-xl shadow-slate-200/50 cursor-pointer"
+    >
+      <div className="absolute top-6 right-6 z-20 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-[#0b1c3d]">
+        {project.year}
+      </div>
+      
+      {/* Image Area */}
+      <div className="h-[60%] bg-slate-50 relative p-8 flex items-center justify-center group-hover:bg-[#f5f7ff] transition-colors duration-500">
+        <Image 
+          src={project.image} 
+          alt={project.client} 
+          width={180} 
+          height={180}
+          className="object-contain w-32 h-32 md:w-40 md:h-40 grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+        />
+      </div>
+
+      {/* Content Area */}
+      <div className="h-[40%] p-8 flex flex-col justify-between bg-white relative">
+        <div>
+          <div className="flex gap-2 mb-3">
+             {project.tags.map((tag: string) => (
+               <span key={tag} className="text-[10px] font-bold uppercase tracking-wider text-[#1b44b5] border border-[#1b44b5]/20 px-2 py-1 rounded-full">
+                 {tag}
+               </span>
+             ))}
+          </div>
+          <h3 className="text-2xl font-black text-[#0b1c3d] mb-2 leading-tight group-hover:text-[#1b44b5] transition-colors">{project.client}</h3>
+          <p className="text-sm text-slate-500 line-clamp-2">{project.description}</p>
+        </div>
+        
+        <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
+          <div className="w-10 h-10 rounded-full bg-[#0b1c3d] flex items-center justify-center text-white">
+            <ArrowUpRight className="w-5 h-5" />
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+function MagneticButton({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouse = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { height, width, left, top } = ref.current!.getBoundingClientRect();
+    const middleX = clientX - (left + width / 2);
+    const middleY = clientY - (top + height / 2);
+    setPosition({ x: middleX * 0.1, y: middleY * 0.1 });
+  };
+
+  const reset = () => {
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const { x, y } = position;
+  return (
+    <motion.div
+      style={{ position: "relative" }}
+      ref={ref}
+      onMouseMove={handleMouse}
+      onMouseLeave={reset}
+      animate={{ x, y }}
+      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+    >
+      {children}
+    </motion.div>
+  );
+}
