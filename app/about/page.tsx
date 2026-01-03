@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Target, Users, Lightbulb, Rocket, Zap, Award, Globe, Briefcase, Heart, BookOpen, Layers, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { Navbar } from "@/components/layout/navbar"
 import { useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 
@@ -85,7 +84,6 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-[#fcfcfc] text-[#0b1c3d] overflow-x-hidden selection:bg-[#1b44b5] selection:text-white" ref={containerRef}>
-      <Navbar />
       
       <motion.div 
         className="fixed top-0 left-0 right-0 h-1 bg-[#1b44b5] origin-left z-50"

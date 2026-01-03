@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Code2, Layout, Sparkles, MessageSquare, CheckCircle2, ArrowUpRight, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { Navbar } from "@/components/layout/navbar"
 import { useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 
@@ -48,7 +47,6 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-[#fcfcfc] text-[#0b1c3d] overflow-x-hidden selection:bg-[#1b44b5] selection:text-white" ref={containerRef}>
-      <Navbar />
       
       {/* Smooth Scroll Progress Bar */}
       <motion.div 

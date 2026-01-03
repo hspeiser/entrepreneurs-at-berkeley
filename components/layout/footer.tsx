@@ -3,21 +3,10 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
 
 export function Footer() {
-  const pathname = usePathname()
-  // Only use dark footer on home page
-  const isDarkFooter = pathname === "/"
-
   return (
-    <footer className={cn(
-      "py-20 border-t relative z-10 backdrop-blur-sm transition-colors duration-300",
-      isDarkFooter 
-        ? "bg-gradient-to-b from-background/95 to-background text-foreground border-blue-500/20" 
-        : "bg-[#fcfcfc] text-[#0b1c3d] border-slate-200"
-    )}>
+    <footer className="py-20 border-t relative z-10 backdrop-blur-xl bg-background/90 text-foreground border-blue-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
@@ -28,19 +17,16 @@ export function Footer() {
                     src="/logo_footer.png" 
                     alt="E@B Logo" 
                     fill 
-                    className={cn(
-                      "rounded-md object-contain",
-                      !isDarkFooter && "invert brightness-0 opacity-80" 
-                    )} 
+                    className="rounded-md object-contain"
                   />
                 </div>
               </Link>
               <div>
-                <p className={cn("text-xs leading-relaxed", isDarkFooter ? "text-muted-foreground" : "text-slate-500")}>
+                <p className="text-xs leading-relaxed text-muted-foreground">
                 The Leading entrepreneurship org at UC Berkeley. 
                 </p>
                 <div className="mt-3">
-                  <p className={cn("text-xs", isDarkFooter ? "text-muted-foreground" : "text-slate-500")}>Sponsored by</p>
+                  <p className="text-xs text-muted-foreground">Sponsored by</p>
                   <div className="mt-2 w-32 h-10 relative">
                     <Image src="/partners/haas.svg" alt="Haas logo" fill className="object-contain" />
                   </div>
@@ -61,12 +47,7 @@ export function Footer() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className={cn(
-                      "transition-colors text-sm",
-                      isDarkFooter 
-                        ? "text-muted-foreground hover:text-blue-400" 
-                        : "text-slate-500 hover:text-[#1b44b5]"
-                    )}
+                    className="transition-colors text-sm text-muted-foreground hover:text-blue-400"
                   >
                     {item.name}
                   </Link>
@@ -78,7 +59,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h3 className="font-bold mb-6 text-lg">Contact</h3>
-            <ul className={cn("space-y-3 text-sm", isDarkFooter ? "text-muted-foreground" : "text-slate-500")}>
+            <ul className="space-y-3 text-sm text-muted-foreground">
               <li>For any club inquiries:</li>
               <li>Email</li>
               <li className="text-blue-400"> deeya@berkeley.edu or chenle27@berkeley.edu</li>
@@ -98,12 +79,7 @@ export function Footer() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className={cn(
-                      "bg-transparent transition-colors",
-                      isDarkFooter
-                        ? "text-muted-foreground hover:text-blue-400 hover:border-blue-500/50"
-                        : "text-slate-500 border-slate-200 hover:text-[#1b44b5] hover:border-[#1b44b5]/50 hover:bg-slate-50"
-                    )}
+                    className="bg-transparent transition-colors text-muted-foreground hover:text-blue-400 hover:border-blue-500/50"
                   >
                     {social.name}
                   </Button>
@@ -113,12 +89,7 @@ export function Footer() {
           </div>
         </div>
         
-        <div className={cn(
-          "pt-8 text-center text-sm border-t",
-          isDarkFooter 
-            ? "border-blue-500/20 text-muted-foreground" 
-            : "border-slate-200 text-slate-400"
-        )}>
+        <div className="pt-8 text-center text-sm border-t border-blue-500/20 text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Entrepreneurs @ Berkeley. All rights reserved.</p>
         </div>
       </div>

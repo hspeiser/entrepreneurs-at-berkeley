@@ -5,7 +5,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import NeuralNetworkCanvas from "@/components/ui/neural-network-canvas"
-import { Navbar } from "@/components/layout/navbar"
 import RotatingText from "@/components/ui/rotating-text"
 
 const stats = [
@@ -73,11 +72,10 @@ const features = [
 export default function HomePage() {
   return (
     <div className="min-h-screen text-foreground overflow-x-hidden">
-      <Navbar />
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-white py-32 sm:py-44">
+        <section className="relative overflow-hidden bg-white py-24 sm:py-32">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(16,42,114,0.12),_transparent_75%)]" aria-hidden="true" />
           <motion.div
             className="absolute inset-x-0 top-12 mx-auto h-72 w-72 rounded-full bg-[#1d34ff]/15 blur-3xl"

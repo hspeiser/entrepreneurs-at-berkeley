@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Calendar, Users, Target, CheckCircle, TrendingUp, Rocket, Globe, Award, ArrowUpRight, Clock } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { Navbar } from "@/components/layout/navbar"
 import { useRef } from "react"
 
 const timeline = [
@@ -105,7 +104,6 @@ export default function RecruitmentPage() {
 
   return (
     <div className="min-h-screen bg-[#fcfcfc] text-[#0b1c3d] overflow-x-hidden selection:bg-[#1b44b5] selection:text-white">
-      <Navbar />
 
       {/* Main Content */}
       <main className="relative pt-24 pb-0" ref={containerRef}>

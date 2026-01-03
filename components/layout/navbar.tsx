@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
@@ -9,15 +10,30 @@ import { Menu, X } from "lucide-react"
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [showNavbar, setShowNavbar] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isHomePage = pathname === "/"
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
+      const scrollY = window.scrollY
+      setScrolled(scrollY > 10)
+      
+      // On home page, show navbar after scrolling past hero (~600px)
+      if (isHomePage) {
+        setShowNavbar(scrollY > 600)
+      } else {
+        setShowNavbar(true)
+      }
     }
+    
+    // Initial check
+    handleScroll()
+    
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [isHomePage])
 
   // Close mobile menu when clicking outside or on a link
   useEffect(() => {
@@ -51,21 +67,25 @@ export function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ 
+          y: showNavbar ? 0 : -100, 
+          opacity: showNavbar ? 1 : 0 
+        }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         className={cn(
           "fixed top-0 w-full z-40 transition-all duration-500",
           scrolled 
             ? "bg-background/90 backdrop-blur-xl border-b border-blue-500/20 shadow-lg" 
             : "bg-transparent",
+          !showNavbar && "pointer-events-none"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-32">
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="w-64 h-64 relative group-hover:scale-110 transition-transform duration-300 mt-4">
-                <Image src="/logo_header.png" alt="E@B Logo" fill className="rounded-md object-contain" />
+                <Image src="/eb-header-logo.svg" alt="E@B Logo" fill className="rounded-md object-contain" />
               </div>
             </Link>
             

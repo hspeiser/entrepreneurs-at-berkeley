@@ -1,12 +1,10 @@
 "use client"
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { Navbar } from "@/components/layout/navbar"
 
 export default function ChatsPage() {
   return (
     <div className="min-h-screen bg-[#fcfcfc] text-[#0b1c3d] overflow-x-hidden selection:bg-[#1b44b5] selection:text-white">
-      <Navbar />
 
       <main className="relative pt-24 pb-0">
         {/* Hero Section with Background Image */}
