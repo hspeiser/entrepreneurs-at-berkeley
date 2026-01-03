@@ -9,7 +9,7 @@ import { Navbar } from "@/components/layout/navbar"
 import RotatingText from "@/components/ui/rotating-text"
 
 const stats = [
-  { number: "3", label: "YC Acceptances", icon: Rocket, description: "In the last 6 months" },
+  { number: "4", label: "Y Combinator Acceptances", icon: Rocket, description: "In the last 6 months" },
   { number: "6", label: "Berkeley SkyDeck", icon: TrendingUp, description: "Teams backed by Berkeley's Premier Accelerator" },
   { number: "$8M+", label: "Raised", icon: DollarSign, description: "from Top Silicon Valley VCs " },
   { number: "60+", label: "Startups Launched", icon: Award, description: "Across diverse industries" },
@@ -73,7 +73,6 @@ const features = [
 export default function HomePage() {
   return (
     <div className="min-h-screen text-foreground overflow-x-hidden">
-      <NeuralNetworkCanvas />
       <Navbar />
 
       <main className="relative z-10">
@@ -249,9 +248,9 @@ export default function HomePage() {
               {[
                 { src: "/group_photo_make_sure_its_small.jpg", title: "Incubator + Demo Day", description: "12-week build sprints and a packed demo room." },
                 { src: "/panel_of_smart_people.jpg", title: "Build Sessions", description: "Product critiques with alumni and visiting partners." },
-                { src: "/founder_dinner.jpg", title: "Founder Dinners", description: "Small table conversations with the operators we admire." },
+                { src: "/founder_dinner.jpg", title: "Founder Dinners", description: "Intimate conversations with top Bay Area founders" },
                 { src: "/202411241117_E@BClubShoot_0542_5D Mark IV.jpg", title: "Client Lab", description: "Paid engagements with Bay Area startups and funds." },
-                { src: "/dude_looking_focused.JPG", title: "Capital Network", description: "SkyDeck, YC, and venture intros when you’re ready." },
+                { src: "/dude_looking_focused.JPG", title: "Capital Network", description: "SkyDeck, Y Combinator, and venture intros when you’re ready." },
                 { src: "/techstars.png", title: "Talent Pipeline", description: "We source teams for VC scouts, accelerators, and labs." },
               ].map((item, index) => (
                 <motion.div
@@ -294,7 +293,7 @@ export default function HomePage() {
                 className="space-y-6"
               >
                 <p className="text-xs uppercase tracking-[0.5em] text-[#1b44b5]/80">Where our alumni ship</p>
-                <h3 className="text-4xl sm:text-5xl font-black text-[#0b1c3d]">From YC to FAANG </h3>
+                <h3 className="text-4xl sm:text-5xl font-black text-[#0b1c3d]">From Y Combinator to FAANG </h3>
                 <p className="text-slate-600">
                   Members build at top accelerators, venture studios, and design forward product teams. We learn from these ecosystems and send founders back with more reps.
                 </p>
@@ -304,8 +303,8 @@ export default function HomePage() {
                     <p>SkyDeck-backed teams in 2024</p>
                   </div>
                   <div className="rounded-2xl border border-[#1b44b5]/15 bg-[#f5f7ff] p-4">
-                    <p className="text-xl font-bold text-[#0b1c3d]">3</p>
-                    <p>YC acceptances from undergrads</p>
+                    <p className="text-xl font-bold text-[#0b1c3d]">4</p>
+                    <p>Y Combinator acceptances from undergrads</p>
                   </div>
                 </div>
               </motion.div>

@@ -1,12 +1,11 @@
 "use client"
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, Calendar, Users, Target, CheckCircle, TrendingUp, Zap, Rocket, Globe, Award } from "lucide-react"
+import { ArrowRight, Calendar, Users, Target, CheckCircle, TrendingUp, Rocket, Globe, Award, ArrowUpRight, Clock } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { Navbar } from "@/components/layout/navbar"
-import NeuralNetworkCanvas from "@/components/ui/neural-network-canvas"
+import { useRef } from "react"
 
 const timeline = [
   {
@@ -59,209 +58,199 @@ const whatWeOffer = [
     title: "Incubator",
     description: "Full startup incubation with mentorship and resources",
     icon: Rocket,
-    color: "from-blue-400 to-cyan-400",
   },
   {
     title: "VC Events",
     description: "Exclusive access to investor pitch events and networking",
     icon: TrendingUp,
-    color: "from-purple-400 to-pink-400",
   },
   {
     title: "Founder Dinners",
     description: "Monthly dinners with successful entrepreneurs and VCs",
     icon: Users,
-    color: "from-green-400 to-emerald-400",
   },
   {
     title: "Community",
     description: "Elite network of builders, designers, and founders",
     icon: Globe,
-    color: "from-orange-400 to-red-400",
   },
   {
     title: "Demo Day",
     description: "Showcase your projects to industry leaders and investors",
     icon: Award,
-    color: "from-yellow-400 to-orange-400",
   },
   {
     title: "Build Track",
     description: "Structured program for shipping products and startups",
     icon: Target,
-    color: "from-emerald-400 to-teal-400",
   },
   {
     title: "Consulting",
     description: "Real client work with top companies and startups",
     icon: Calendar,
-    color: "from-indigo-400 to-purple-400",
   },
   {
     title: "Social",
     description: "Fun socials, retreats, and team bonding",
     icon: Users,
-    color: "from-pink-400 to-rose-400",
   },
 ]
 
 export default function RecruitmentPage() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  })
+
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <NeuralNetworkCanvas />
+    <div className="min-h-screen bg-[#fcfcfc] text-[#0b1c3d] overflow-x-hidden selection:bg-[#1b44b5] selection:text-white">
       <Navbar />
 
       {/* Main Content */}
-      <main className="relative z-10 pt-24">
-        {/* Hero Section with Background Image */}
-        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <main className="relative pt-24 pb-0" ref={containerRef}>
+        {/* Hero Section */}
+        <section className="relative min-h-[90vh] flex flex-col justify-end px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden rounded-[3rem] mb-24 bg-white">
           {/* Background Image */}
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 z-0">
             <Image
               src="/group_photo_big_ok.jpg"
-              alt="E&B Community Group"
+              alt="E@B Community Group"
               fill
-              className="object-cover"
+              className="object-cover object-center"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-purple-900/30" />
+            <div className="absolute inset-0 bg-white/10 backdrop-blur-[1px]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
           </div>
           
           {/* Hero Content */}
-          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="relative z-10 pb-20">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm">
-                <Zap className="w-4 h-4 mr-2" />
-                APPS DUE 9/5!
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1b44b5]/10 border border-[#1b44b5]/20 text-[#1b44b5] text-sm font-bold mb-6">
+                <Clock className="w-4 h-4" />
+                APPS DUE 9/5
               </div>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-tight">
-                JOIN THE <span className="gradient-text">MISSION</span>
+              <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-[#0b1c3d] mb-6 leading-[0.9] tracking-tight mix-blend-color-burn">
+                JOIN E@B
               </h1>
-              <p className="text-xl md:text-2xl lg:text-3xl text-blue-100 mb-12 max-w-4xl mx-auto font-light">
-                We are looking for the ambitious, the relentless, and the visionary.
-                <br />
-                <span className="text-blue-300 font-semibold">If you want to build, you belong here.</span>
+              <p className="text-2xl md:text-3xl lg:text-4xl text-slate-700 mb-10 max-w-3xl font-medium leading-tight">
+                We're looking for builders, thinkers, and dreamers who want to create the future.
               </p>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link href="https://forms.gle/Py8cwGjt3kJCrRLH7" target="_blank" rel="noopener noreferrer">
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"
-                  >
-                    APPLY NOW
-                    <ArrowRight className="ml-3 h-6 w-6" />
-                  </Button>
-                </Link>
-              </motion.div>
+              <Link href="https://forms.gle/Py8cwGjt3kJCrRLH7" target="_blank" rel="noopener noreferrer">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group relative px-8 py-4 bg-[#0b1c3d] text-white rounded-2xl font-bold text-lg overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Apply Now
+                    <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                  <motion.div 
+                    className="absolute inset-0 bg-[#1b44b5]"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.button>
+              </Link>
             </motion.div>
-
           </div>
         </section>
 
-        {/* Builder/Visionary Cards Section */}
-
-
         {/* Recruitment Timeline */}
-        <section className="py-24 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
+        <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="mb-16"
             >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6">
-                <span className="gradient-text">RECRUITMENT</span> TIMELINE
+              <h2 className="text-5xl md:text-6xl font-black text-[#0b1c3d] mb-4">
+                Recruitment Timeline
               </h2>
-              <p className="text-xl text-muted-foreground">Come to our recruitment events and learn more about us!</p>
+              <p className="text-xl text-slate-600">Mark your calendars for these key dates</p>
             </motion.div>
 
-            <div className="relative">
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500"></div>
-
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={item.phase}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className={`relative flex items-center mb-12 ${index % 2 === 0 ? "justify-start" : "justify-end"}`}
-                >
-                  <div className={`w-1/2 ${index % 2 === 0 ? "pr-8" : "pl-8"}`}>
-                    {item.phase === "Coffee Chats" ? (
-                      <Link href="/chats">
-                        <Card className="p-6 bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm cursor-pointer hover:scale-105">
-                          <CardContent className="p-0">
-                            <div className="flex items-center justify-between mb-4">
-                              <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                                {item.phase}
-                              </div>
-                              <span className="text-sm text-muted-foreground">{item.date}</span>
-                            </div>
-                            <p className="text-muted-foreground">{item.description}</p>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    ) : (
-                      <Card className="p-6 bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm">
-                        <CardContent className="p-0">
-                          <div className="flex items-center justify-between mb-4">
-                            <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                              {item.phase}
-                            </div>
-                            <span className="text-sm text-muted-foreground">{item.date}</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {timeline.map((item, index) => {
+                const Component = item.phase === "Coffee Chats" ? Link : "div"
+                const props = item.phase === "Coffee Chats" ? { href: "/chats" } : {}
+                
+                return (
+                  <motion.div
+                    key={item.phase}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Component {...props}>
+                      <motion.div
+                        whileHover={{ y: -4 }}
+                        className={`relative p-6 rounded-2xl border border-slate-100 bg-white hover:border-[#1b44b5]/30 transition-all duration-300 h-full ${
+                          item.phase === "Coffee Chats" ? "cursor-pointer" : ""
+                        }`}
+                      >
+                        {item.phase === "Applications Due" && (
+                          <div className="absolute -top-2 -right-2 px-3 py-1 bg-[#1b44b5] text-white text-xs font-bold rounded-full">
+                            DEADLINE
                           </div>
-                          <p className="text-muted-foreground">{item.description}</p>
-                        </CardContent>
-                      </Card>
-                    )}
-                  </div>
-
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-4 border-background shadow-lg"></div>
-                </motion.div>
-              ))}
+                        )}
+                        <div className="flex items-start justify-between mb-3">
+                          <h3 className="text-xl font-black text-[#0b1c3d]">{item.phase}</h3>
+                          {item.phase === "Coffee Chats" && <ArrowUpRight className="w-5 h-5 text-[#1b44b5]" />}
+                        </div>
+                        <p className="text-sm font-bold text-[#1b44b5] mb-3">{item.date}</p>
+                        <p className="text-slate-600 leading-relaxed">{item.description}</p>
+                      </motion.div>
+                    </Component>
+                  </motion.div>
+                )
+              })}
             </div>
           </div>
         </section>
 
         {/* Requirements */}
-        <section className="py-24">
+        <section className="py-24 bg-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
+                className="lg:col-span-3"
               >
-                <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6">
-                  WHAT WE'RE <span className="gradient-text">LOOKING FOR</span>
+                <h2 className="text-5xl md:text-6xl font-black text-[#0b1c3d] mb-6">
+                  Who We're Looking For
                 </h2>
-                <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                  We are looking for students passionate about building impactful products and changing the world!
+                <p className="text-xl text-slate-600 mb-10 leading-relaxed">
+                  We're looking for students passionate about building impactful products and changing the world.
                 </p>
-                <ul className="space-y-4">
+                <div className="space-y-4">
                   {requirements.map((requirement, index) => (
-                    <motion.li
+                    <motion.div
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
                       viewport={{ once: true }}
-                      className="flex items-center"
+                      className="flex items-start gap-4 p-4 rounded-xl bg-white border border-slate-100"
                     >
-                      <CheckCircle className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" />
-                      <span className={`text-muted-foreground ${requirement.startsWith("Passion for entrepreneurship and innovation") ? "font-bold" : ""}`}>{requirement}</span>
-                    </motion.li>
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#1b44b5] mt-2 flex-shrink-0" />
+                      <span className="text-slate-700 text-lg leading-relaxed">{requirement}</span>
+                    </motion.div>
                   ))}
-                </ul>
+                </div>
               </motion.div>
 
               <motion.div
@@ -269,21 +258,16 @@ export default function RecruitmentPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="relative group"
+                className="lg:col-span-2"
               >
-                <div className="relative overflow-hidden rounded-2xl">
+                <div className="relative overflow-hidden rounded-3xl">
                   <Image
-                    src="/student_giving_talk.JPG"
-                    alt="E&B Team Collaboration"
+                    src="/group-pictures/student_giving_talk.JPG"
+                    alt="E@B Team Collaboration"
                     width={600}
-                    height={400}
-                    className="rounded-2xl shadow-lg transition-transform duration-500 group-hover:scale-105"
+                    height={800}
+                    className="w-full h-auto"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent rounded-2xl" />
-                  <motion.div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <motion.div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Zap className="w-6 h-6 text-blue-400" />
-                  </motion.div>
                 </div>
               </motion.div>
             </div>
@@ -291,48 +275,43 @@ export default function RecruitmentPage() {
         </section>
 
         {/* What We Offer */}
-        <section className="py-24 bg-gradient-to-b from-background/95 to-background backdrop-blur-sm">
+        <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="mb-16"
             >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6">
-                WHAT WE <span className="gradient-text">OFFER</span>
+              <h2 className="text-5xl md:text-6xl font-black text-[#0b1c3d] mb-4">
+                What You'll Get
               </h2>
-              <p className="text-xl text-muted-foreground">Exclusive opportunities and experiences for our members</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className="space-y-3">
               {whatWeOffer.map((item, index) => (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
                   viewport={{ once: true }}
-                  whileHover={{ scale: 1.02, rotateY: 2 }}
-                  className="perspective-1000"
+                  className="group"
                 >
-                  <Card className="p-6 text-center h-full bg-gradient-to-br from-card to-card/80 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 backdrop-blur-sm group">
-                    <motion.div
-                      className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-lg`}
-                    />
-                    <CardContent className="p-0 relative z-10">
-                      <motion.div
-                        className={`w-12 h-12 bg-gradient-to-r ${item.color} rounded-lg flex items-center justify-center mx-auto mb-4 shadow-lg`}
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <item.icon className="h-6 w-6 text-white" />
-                      </motion.div>
-                      <h3 className="text-lg font-bold text-foreground mb-3">{item.title}</h3>
-                      <p className="text-muted-foreground">{item.description}</p>
-                    </CardContent>
-                  </Card>
+                  <div className="flex items-center gap-6 p-6 rounded-2xl border border-transparent hover:border-slate-100 hover:bg-slate-50/50 transition-all duration-300">
+                    <div className="flex-shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-[#1b44b5] group-hover:scale-125 transition-transform" />
+                    </div>
+                    <div className="flex-1 flex items-baseline gap-4 flex-wrap">
+                      <h3 className="text-2xl font-black text-[#0b1c3d] min-w-[200px]">
+                        {item.title}
+                      </h3>
+                      <p className="text-lg text-slate-600 flex-1">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -340,45 +319,51 @@ export default function RecruitmentPage() {
         </section>
 
         {/* Application CTA */}
-        <section className="py-24 bg-gradient-to-b from-background to-background/95 backdrop-blur-sm">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section className="py-32 bg-slate-50">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
+              className="text-center"
             >
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-8">
-                READY TO <span className="gradient-text">APPLY?</span>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-[#0b1c3d] mb-6 leading-tight">
+                Ready to Apply?
               </h2>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto">
-                <span className="text-primary font-semibold">Applications are now open for Fall 2025.</span>
+              <p className="text-xl md:text-2xl text-slate-600 mb-12 max-w-3xl mx-auto">
+                Applications are now open for <span className="text-[#1b44b5] font-bold">Fall 2025</span>
               </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link href="https://forms.gle/Py8cwGjt3kJCrRLH7" target="_blank" rel="noopener noreferrer">
-                    <Button
-                      size="lg"
-                      className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl px-12 py-8 font-bold animate-pulse-glow"
-                    >
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link href="https://forms.gle/Py8cwGjt3kJCrRLH7" target="_blank" rel="noopener noreferrer">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="group relative px-8 py-4 bg-[#0b1c3d] text-white rounded-2xl font-bold text-lg overflow-hidden"
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
                       Submit Application
-                      <ArrowRight className="ml-3 h-6 w-6" />
-                    </Button>
-                  </Link>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link href="/about" onClick={() => window.scrollTo(0, 0)}>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="text-xl px-12 py-8 font-bold border-2 border-blue-500/30 hover:border-blue-500/60 hover:bg-blue-500/10 bg-transparent backdrop-blur-sm"
-                    >
-                      Learn More
-                    </Button>
-                  </Link>
-                </motion.div>
+                      <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                    </span>
+                    <motion.div 
+                      className="absolute inset-0 bg-[#1b44b5]"
+                      initial={{ x: "-100%" }}
+                      whileHover={{ x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </motion.button>
+                </Link>
+                <Link href="/about">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="px-8 py-4 bg-white text-[#0b1c3d] rounded-2xl font-bold text-lg border-2 border-slate-200 hover:border-[#1b44b5]/30 transition-colors"
+                  >
+                    Learn More
+                  </motion.button>
+                </Link>
               </div>
-              <p className="text-muted-foreground mt-8 text-sm">Application deadline: September 5, 2025</p>
+              <p className="text-slate-500 mt-8 font-medium">Application deadline: September 5, 2025</p>
             </motion.div>
           </div>
         </section>

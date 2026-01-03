@@ -38,40 +38,6 @@ const projects = [
   }
 ]
 
-const processSteps = [
-  {
-    id: "01",
-    title: "Scope & Squad",
-    shortDesc: "Embed PM & Tech Lead",
-    description: "We don't just take a ticket. We embed a PM and Tech Lead to challenge your assumptions, refine the problem statement, and define clear success metrics before writing a single line of code.",
-    icon: MessageSquare,
-    color: "bg-blue-500"
-  },
-  {
-    id: "02",
-    title: "Sprint Zero",
-    shortDesc: "Setup & Architecture",
-    description: "Week 1 is pure intensity. We align on the technical stack, set up the repo and CI/CD pipelines, and deliver initial high-fidelity mocks. We ship to production from day one.",
-    icon: Sparkles,
-    color: "bg-purple-500"
-  },
-  {
-    id: "03",
-    title: "Build & Iterate",
-    shortDesc: "2-Week Sprints",
-    description: "We run rigorous two-week sprints with live demos. We work directly in your Slack, push code to your GitHub, and pivot fast based on your real-time feedback.",
-    icon: Code2,
-    color: "bg-indigo-500"
-  },
-  {
-    id: "04",
-    title: "Handoff",
-    shortDesc: "Docs & Transfer",
-    description: "We don't lock you in. You get the code, the documentation, the design files, and a clean IP transfer. We often onboard your full-time engineers to take over the codebase.",
-    icon: CheckCircle2,
-    color: "bg-emerald-500"
-  }
-]
 
 export default function ProjectsPage() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -90,10 +56,10 @@ export default function ProjectsPage() {
         style={{ scaleX: scrollYProgress }}
       />
 
-      <main className="relative pt-24 pb-0">
+      <main className="relative pt-24 bg-[#fcfcfc]">
         
         {/* Hero */}
-        <section className="relative min-h-[90vh] flex flex-col justify-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden rounded-[3rem] mb-20">
+        <section className="relative min-h-[90vh] flex flex-col justify-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden rounded-[3rem] mb-20 bg-white">
            {/* Background Image with Overlay */}
            <div className="absolute inset-0 z-0">
               <Image 
@@ -120,7 +86,7 @@ export default function ProjectsPage() {
               </span>
             </h1>
             
-            <div className="flex flex-col md:flex-row gap-8 items-start md:items-end justify-between mt-12">
+            <div className="flex flex-col gap-12 mt-12">
               <p className="text-xl md:text-3xl font-medium text-slate-800 max-w-xl leading-relaxed">
                 A high-velocity product studio at UC Berkeley. We build software that matters.
               </p>
@@ -156,41 +122,15 @@ export default function ProjectsPage() {
                 alt="Our Clients: Google, Tesla, Spotify, etc." 
                 width={1200}
                 height={600}
-                className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100"
+                className="w-full h-auto object-contain transition-all duration-500"
               />
             </motion.div>
           </div>
         </section>
 
-        {/* Interactive Process (Swapped Position) */}
-        <section className="py-32 bg-[#0b1c3d] text-white rounded-[3rem] mx-4 sm:mx-6 lg:mx-8 relative overflow-hidden mb-32">
-          {/* Background Gradient */}
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#1b44b5]/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24">
-              <div className="lg:sticky lg:top-32 h-fit">
-                <h2 className="text-5xl md:text-7xl font-black mb-6">How We <br /><span className="text-[#3b82f6]">Ship.</span></h2>
-                <p className="text-xl text-slate-300 max-w-md leading-relaxed mb-8">
-                   We've refined our process over 60+ projects. Click through our sprint cycle to see how we deliver.
-                </p>
-                <div className="hidden lg:block">
-                   <Link href="mailto:contact@entrepreneursatberkeley.com">
-                      <Button className="bg-white text-[#0b1c3d] hover:bg-slate-100 rounded-full px-8 py-6 text-lg font-bold shadow-lg shadow-white/10">
-                        Start a Sprint
-                      </Button>
-                   </Link>
-                </div>
-              </div>
-
-              {/* Interactive Component */}
-              <InteractiveProcessList />
-            </div>
-          </div>
-        </section>
-
-        {/* Selected Work (Swapped Position) */}
-        <section className="py-32 bg-[#fcfcfc]">
+        {/* Selected Work */}
+        <section className="bg-[#fcfcfc] pt-32 pb-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 flex items-end justify-between">
             <div>
               <h2 className="text-5xl md:text-6xl font-black text-[#0b1c3d] tracking-tight mb-4">Selected Work</h2>
@@ -201,26 +141,28 @@ export default function ProjectsPage() {
             </div>
           </div>
 
-          <div className="overflow-x-auto pb-12 px-4 sm:px-6 lg:px-8 -mx-4 sm:-mx-6 lg:-mx-8 scrollbar-hide">
-             <div className="flex gap-6 w-max mx-auto lg:mx-0">
-               {projects.map((project, i) => (
-                 <ProjectCard key={i} project={project} index={i} />
-               ))}
-               
-               {/* "More" Card */}
-               <motion.div 
-                 initial={{ opacity: 0, x: 20 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 transition={{ delay: 0.3 }}
-                 className="w-[300px] md:w-[350px] aspect-[4/5] rounded-[2rem] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center p-8 hover:bg-slate-50 transition-colors cursor-pointer group"
-               >
-                 <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <ArrowRight className="w-6 h-6 text-slate-400" />
-                 </div>
-                 <h3 className="text-xl font-bold text-[#0b1c3d]">View Archive</h3>
-                 <p className="text-sm text-slate-500 mt-2">Explore 50+ past projects</p>
-               </motion.div>
-             </div>
+          <div className="bg-[#fcfcfc] pb-12">
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-6 px-4 sm:px-6 lg:px-8 pb-12">
+                {projects.map((project, i) => (
+                  <ProjectCard key={i} project={project} index={i} />
+                ))}
+                
+                {/* "More" Card */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="w-[300px] md:w-[350px] aspect-[4/5] rounded-[2rem] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center p-8 hover:bg-slate-50 transition-colors cursor-pointer group shrink-0"
+                >
+                  <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                     <ArrowRight className="w-6 h-6 text-slate-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#0b1c3d]">View Archive</h3>
+                  <p className="text-sm text-slate-500 mt-2">Explore 50+ past projects</p>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -228,92 +170,6 @@ export default function ProjectsPage() {
     </div>
   )
 }
-
-function InteractiveProcessList() {
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  return (
-    <div className="flex flex-col gap-4">
-      {processSteps.map((step, index) => (
-        <motion.div
-          key={step.id}
-          className={cn(
-            "relative overflow-hidden rounded-3xl border transition-all duration-500 cursor-pointer",
-            activeIndex === index 
-              ? "bg-white/10 border-white/20" 
-              : "bg-transparent border-white/5 hover:bg-white/5"
-          )}
-          onClick={() => setActiveIndex(index)}
-          initial={false}
-          animate={{
-             height: activeIndex === index ? "auto" : "100px" 
-          }}
-        >
-          <div className="p-8 flex items-start gap-6">
-            <div className={cn(
-               "w-12 h-12 rounded-full flex items-center justify-center text-white shrink-0 transition-colors duration-500",
-               activeIndex === index ? step.color : "bg-white/10"
-            )}>
-              <step.icon className="w-6 h-6" />
-            </div>
-            
-            <div className="flex-1">
-               <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-4">
-                     <span className="text-sm font-bold text-white/40 uppercase tracking-widest">{step.id}</span>
-                     <h3 className={cn(
-                        "text-2xl font-bold transition-colors duration-300",
-                        activeIndex === index ? "text-white" : "text-white/60"
-                     )}>
-                        {step.title}
-                     </h3>
-                  </div>
-                  <ChevronRight className={cn(
-                     "w-6 h-6 text-white/40 transition-transform duration-300",
-                     activeIndex === index ? "rotate-90" : "rotate-0"
-                  )} />
-               </div>
-               
-               <AnimatePresence>
-                 {activeIndex === index && (
-                   <motion.div
-                     initial={{ opacity: 0, height: 0 }}
-                     animate={{ opacity: 1, height: "auto" }}
-                     exit={{ opacity: 0, height: 0 }}
-                     transition={{ duration: 0.3 }}
-                   >
-                     <p className="text-xl text-slate-300 leading-relaxed mt-4 pb-2">
-                       {step.description}
-                     </p>
-                   </motion.div>
-                 )}
-               </AnimatePresence>
-               
-               {activeIndex !== index && (
-                  <motion.p 
-                     initial={{ opacity: 0 }}
-                     animate={{ opacity: 1 }}
-                     className="text-slate-500 mt-1"
-                  >
-                     {step.shortDesc}
-                  </motion.p>
-               )}
-            </div>
-          </div>
-          
-          {/* Active Indicator Bar */}
-          {activeIndex === index && (
-             <motion.div 
-               layoutId="active-bar"
-               className={cn("absolute left-0 top-0 bottom-0 w-1", step.color)}
-             />
-          )}
-        </motion.div>
-      ))}
-    </div>
-  )
-}
-
 
 function ProjectCard({ project, index }: { project: any, index: number }) {
   return (
@@ -335,7 +191,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
           alt={project.client} 
           width={180} 
           height={180}
-          className="object-contain w-32 h-32 md:w-40 md:h-40 grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+          className="object-contain w-32 h-32 md:w-40 md:h-40 transition-all duration-500 group-hover:scale-110"
         />
       </div>
 
