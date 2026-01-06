@@ -64,11 +64,11 @@ export default function ChatsPage() {
               <div className="bg-white rounded-[2rem] border border-slate-100 shadow-xl overflow-hidden">
                 <iframe
                   className="airtable-embed w-full"
-                  src="https://airtable.com/embed/appf1AiTCOW8nssIu/shrDlBos4PiP12GPW"
+                  src="https://airtable.com/embed/appf1AiTCOW8nssIu/shrDlBos4PiP12GPW?viewControls=on"
                   frameBorder="0"
                   width="100%"
-                  height="800"
-                  style={{ background: 'transparent', border: 'none' }}
+                  height="533"
+                  style={{ background: 'transparent', border: '1px solid #ccc' }}
                 />
               </div>
             </motion.div>
