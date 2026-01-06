@@ -64,7 +64,7 @@ export default function ChatsPage() {
               <div className="bg-white rounded-[2rem] border border-slate-100 shadow-xl overflow-hidden">
                 <iframe
                   className="airtable-embed w-full"
-                  src="https://airtable.com/embed/apph2byC1IzesgfgC/shrFCyuCjSaIpEL28"
+                  src="https://airtable.com/embed/appf1AiTCOW8nssIu/shrDlBos4PiP12GPW"
                   frameBorder="0"
                   width="100%"
                   height="800"
